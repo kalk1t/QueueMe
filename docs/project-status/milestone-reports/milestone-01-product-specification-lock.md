@@ -20,7 +20,7 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after draft commit
-- Commit at completion: `670626e8b62931d3cf2833d69832710590a0d92d`
+- Commit at completion: `e2820ab9a8d60a60a7e9cc69425ad6a670a1221d`
 
 ## 4) Starting repository inventory
 
@@ -127,7 +127,7 @@ git diff --name-only -- project-plan/00_locked_product_baseline.md project-plan/
 
 - `docs/product/release-1-approval-record.md` indicates approval state:
   - `Approval status: PENDING PRODUCT-OWNER APPROVAL`
-  - `PRD draft commit: 670626e8b62931d3cf2833d69832710590a0d92d`
+  - `PRD draft commit: e2820ab9a8d60a60a7e9cc69425ad6a670a1221d`
 - No product-owner signature/date has been provided.
 
 ## 13) Security and privacy review
@@ -175,7 +175,7 @@ git diff --name-only -- project-plan/00_locked_product_baseline.md project-plan/
 | 8) Lifecycle behavior documented | PASS |
 | 9) Roles/permissions documented | PASS |
 | 10) Success metrics and Release 1 DoD documented | PASS |
-| 11) No unresolved TODO/FIXME/TBD placeholders | PASS |
+| 11) No unresolved placeholder markers remain | PASS |
 | 12) No approved behavior changed | PASS |
 | 13) No app/infrastructure implementation introduced | PASS |
 | 14) Locked baseline unchanged | PASS |
