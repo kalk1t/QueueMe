@@ -23,7 +23,7 @@
 ## 4) Starting inventory
 
 - Existing architecture documentation: `docs/architecture/README.md` only.
-- Existing ADR index: `docs/architecture/adr/README.md` placeholder.
+- Existing ADR index: `docs/adr/README.md` (no architecture decisions prior to this milestone, only structure).
 - Security and project docs were already present and baseline-oriented.
 
 ## 5) Files created for Milestone 02
