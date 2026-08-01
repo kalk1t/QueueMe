@@ -3,7 +3,7 @@
 ## Current approval header
 
 - Document version: `1.0.0`
-- PRD draft commit: `1c2717febd2178972a86c811c6107ef2e92911a7`
+- PRD draft commit: `2599760f29934e5ce0e4b6694b614d7c26a1addc`
 - Approval status: `PENDING PRODUCT-OWNER APPROVAL`
 - Approval date: not yet recorded
 - Approver role: pending
