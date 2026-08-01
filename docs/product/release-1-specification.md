@@ -10,9 +10,9 @@
 | Created for milestone | Milestone 01 — Product Specification Lock |
 | Authoritative source | `project-plan/00_locked_product_baseline.md` |
 | Previous version | `not applicable` |
-| Status | Draft |
+| Status | Approved |
 | Last updated | 2026-08-01 |
-| Approval status | PENDING PRODUCT-OWNER APPROVAL |
+| Approval status | APPROVED |
 | Branch at draft | `main` |
 
 ## 2. Authority and interpretation

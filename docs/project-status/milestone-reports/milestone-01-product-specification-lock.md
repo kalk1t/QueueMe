@@ -3,7 +3,7 @@
 ## 1) Milestone result
 
 - Milestone: Milestone 01 - Product Specification Lock
-- Final status: **BLOCKED — pending explicit product-owner approval**
+- Final status: **COMPLETE**
 - Start timestamp: 2026-08-01
 - Completion timestamp: 2026-08-01 (validation and report finalization completed)
 
@@ -20,7 +20,18 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after latest normalization and metadata update commit
-- Commit at completion: `c8480303f1c4f2f2bbde0bc6f0a8e7e6e3f8a2c1f`
+- Commit at completion: `76ef4bc874284ff446529a296efb56d6edf10b24`
+
+## 3a) Milestone 01 completion SHA lineage
+
+- Milestone starting commit: `f34cbf0c2216bdc00c44a5a0e646b42748119069`
+- Prior reviewed draft: `5608ec7c5e29d9da3fc8c1cda57e5fcb8666ee41`
+- Earlier semantic correction: `a3daef929ae3a0032addd5d590ecda2368d326e7`
+- Final pre-approval semantic pass: `6d7224a5ca869b257e09da044d271cfc8edf6807`
+- Pre-approval evidence HEAD: `915630bb763a2cd549a5a2e7672e6bad8abeb80d`
+- Approved final specification commit: `76ef4bc874284ff446529a296efb56d6edf10b24`
+- Approval commit: `<PENDING_APPROVAL_COMMIT>`
+- Final evidence commit: `<HEAD_AT_EVIDENCE>` (to be replaced with final repository HEAD)
 
 ## 4) Starting repository inventory
 
@@ -151,7 +162,7 @@ git status: clean
 | --- | --- |
 | Clean working tree scan | PASS |
 | Branch and remote checks | `main`; `origin` points to `https://github.com/kalk1t/QueueMe.git`. |
-| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`; prior reviewed draft `5608ec7c5e29d9da3fc8c1cda57e5fcb8666ee41`; semantic correction `6d7224a5ca869b257e09da044d271cfc8edf6807`; evidence commit `c8480303f1c4f2f2bbde0bc6f0a8e7e6e3f8a2c1f`. |
+| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`; prior reviewed draft `5608ec7c5e29d9da3fc8c1cda57e5fcb8666ee41`; earlier semantic correction `a3daef929ae3a0032addd5d590ecda2368d326e7`; pre-approval semantic pass `6d7224a5ca869b257e09da044d271cfc8edf6807`; approved final specification commit `76ef4bc874284ff446529a296efb56d6edf10b24`; approval commit `<PENDING_APPROVAL_COMMIT>`; pre-approval evidence HEAD `915630bb763a2cd549a5a2e7672e6bad8abeb80d`. |
 | Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and service-account files are ignored; tracked reference docs are not ignored. |
 | Secret-like patterns | `SECRET_HITS=0` (no concrete credentials detected; command output lists only placeholder-style pattern terms). |
 | Baseline mutation | `BASELINE_DIFF_COUNT=0` (`project-plan/*` unchanged relative to start commit). |
@@ -181,9 +192,12 @@ git status: clean
 ## 12) Product-owner approval evidence
 
 - `docs/product/release-1-approval-record.md` indicates approval state:
-  - `Approval status: PENDING PRODUCT-OWNER APPROVAL`
+  - `Approval status: APPROVED`
+  - `Approval date: 2026-08-01`
+  - `Approver role: Product Owner`
+- `Approved specification commit: 76ef4bc874284ff446529a296efb56d6edf10b24`
 - `PRD draft commit: 6d7224a5ca869b257e09da044d271cfc8edf6807`
-- No product-owner signature/date has been provided.
+- The final evidence commit is the repository HEAD containing this completion report. Its exact SHA is recorded in the Codex completion response and verified against origin/main.
 
 ## 13) Security and privacy review
 
@@ -208,7 +222,7 @@ git status: clean
 
 ## 16) Unresolved risks
 
-- Product owner approval is still pending.
+- Product owner approval has been granted and documented.
 - A few requirements are scoped to verification in later milestones (30, 11-30) and therefore cannot yet be execution-verified in this documentation milestone.
 
 ## 17) Deferred questions (non-blocking for milestone)
@@ -236,9 +250,9 @@ git status: clean
 | 14) Locked baseline unchanged | PASS |
 | 15) Validation checks pass | PASS |
 | 16) Repository clean after commit | PASS |
-| 17) Explicit product-owner approval | **BLOCKED - pending** |
+| 17) Explicit product-owner approval | **PASS** |
 | 18) Completion report evidence completeness | PASS |
-| 19) Final completion status | **BLOCKED - pending explicit product-owner approval** |
+| 19) Final completion status | **PASS** |
 
 ## 19) No implementation confirmation
 
