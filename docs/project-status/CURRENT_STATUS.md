@@ -3,11 +3,12 @@
 - Project: QueueMe
 - Release: Business-Ready Version 1
 - Current phase: Phase I - Product and Engineering Foundation
-- Active milestone: None
+- Active milestone: Milestone 02 - Architecture and Decision Records
 - Completed milestone: Milestone 01 - Product Specification Lock
 - Milestone 01 status: Complete
-- Next milestone: Milestone 02 - Architecture and Decision Records
-- Milestone 02 status: Not started
+- Next milestone: Milestone 03 - Repository and Engineering Standards
+- Milestone 02 status: Blocked
+- Milestone 02 evidence status: Blocked (product-owner approval and external account checks still pending)
 - Application code: Not initialized
 - Infrastructure: Not provisioned
 - Production environment: Not created

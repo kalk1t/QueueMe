@@ -21,9 +21,10 @@ QueueMe coordinates queue flow, customer check-in, wait estimation, and operator
 
 ## Current repository state
 
-- Repository foundation only
-- No application functionality is implemented
-- Milestone 01 is not started
+- Repository foundation and architecture planning complete
+- No application functionality is implemented yet
+- Milestone 01 is complete
+- Milestone 02 is in architecture and decision-review stage
 - No framework, build system, backend runtime, cloud environment, payment, or SMS integration is yet initialized
 
 ## High-level architecture map
