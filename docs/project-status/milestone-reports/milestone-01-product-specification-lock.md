@@ -1,9 +1,9 @@
-# Milestone 01 — Product Specification Lock Report
+# Milestone 01 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Product Specification Lock Report
 
 ## 1) Milestone result
 
-- Milestone: Milestone 01 — Product Specification Lock
-- Final status: **BLOCKED — pending explicit product-owner approval**
+- Milestone: Milestone 01 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Product Specification Lock
+- Final status: **BLOCKED ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â pending explicit product-owner approval**
 - Start timestamp: 2026-08-01
 - Completion timestamp: 2026-08-01 (validation and report finalization completed)
 
@@ -12,15 +12,15 @@
 - Branch at start: `main`
 - Commit at start: `f34cbf0c2216bdc00c44a5a0e646b42748119069`
 - Working tree at start: clean
-- Remote: `origin` → `https://github.com/kalk1t/QueueMe.git`
+- Remote: `origin` ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ `https://github.com/kalk1t/QueueMe.git`
 - Existing test/build capability: no runnable application code; no framework build/test commands available for this repository phase.
 - Deployed environment state: not deployed; no production or staging environments provisioned for this repository scope.
 
 ## 3) Repository state at completion
 
 - Branch at completion: `main`
-- Working tree at completion: currently dirty in this file only (line-ending normalization; no semantic content change)
-- Commit at completion: `5aff368`
+- Working tree at completion: clean after follow-up report normalization commit
+- Commit at completion: `2afd04c`
 
 ## 4) Starting repository inventory
 
@@ -130,30 +130,30 @@ TRACE_BASELINE_ROWS=95
 TRACE_OWNER_ROWS=95
 SPEC_NOT_IN_BASELINE_MAP=0
 BASELINE_NOT_IN_SPEC=0
-MISSING_ACCEPTANCE=0
-MISSING_MILESTONE=0
-MISSING_ACTOR=0
-MISSING_RISK=0
+PRD_MISSING_ACCEPTANCE=0
+PRD_MISSING_MILESTONE=0
+PRD_MISSING_ACTOR=0
+PRD_MISSING_RISK=0
 PLACEHOLDER_FILES_WITH_MARKERS=0
 SECRET_HITS=0
 BASELINE_DIFF_LINES=0
 FORBIDDEN_HITS=0 (non-markdown source scan)
-git status: one modified file (`docs/project-status/milestone-reports/milestone-01-product-specification-lock.md`) with no functional diff
+git status: clean
 ```
 
 ## 10) Validation results
 
 | Check | Command result |
 | --- | --- |
-| Clean working tree scan | No functional diffs; file reports one modified path with only line-ending/metadata churn. |
+| Clean working tree scan | PASS |
 | Branch and remote checks | `main`; `origin` points to `https://github.com/kalk1t/QueueMe.git`. |
-| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `5aff368`. |
+| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `2afd04c`. |
 | Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and service-account files are ignored; tracked reference docs are not ignored. |
 | Secret-like patterns | `SECRET_HITS=0` (no concrete credentials detected; command output lists only placeholder-style pattern terms). |
 | Baseline mutation | `BASELINE_DIFF_LINES=0` (`project-plan/*` unchanged relative to start commit). |
 | Framework/code artifacts | `FORBIDDEN_HITS=0` in non-markdown file scan (no application/framework artifacts introduced). |
-| PRD requirement extraction | `PRD_ID_COUNT=95`, `PRD_ID_UNIQUE=95`, `REQ_DUPLICATES=`. |
-| Traceability mapping parse | `BASELINE_MAP_ROWS=95`, `OWNERSHIP_ROWS=95`, `MISSING_IN_BASELINE_MAP=` (empty), `MISSING_OWNER=` (empty). |
+| PRD requirement extraction | `REQ_TOTAL=95`, `REQ_UNIQUE=95`, `REQ_DUPES=0`. |
+| Traceability mapping parse | `BASELINE_MAP_ROWS=95`, `OWNERSHIP_ROWS=95`, `SPEC_NOT_IN_BASELINE_MAP=0`, `OWNER_MISSING=0`. |
 | Acceptance-condition coverage | `MISSING_ACCEPTANCE=0`, `MISSING_MILESTONE=0`, `MISSING_ACTOR=0`, `MISSING_RISK=0`. |
 | Milestone scope | Only documentation and planning deliverables changed. |
 
@@ -195,7 +195,7 @@ git status: one modified file (`docs/project-status/milestone-reports/milestone-
 ## 16) Unresolved risks
 
 - Product owner approval is still pending.
-- A few requirements are scoped to verification in later milestones (30, 11–30) and therefore cannot yet be execution-verified in this documentation milestone.
+- A few requirements are scoped to verification in later milestones (30, 11ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“30) and therefore cannot yet be execution-verified in this documentation milestone.
 
 ## 17) Deferred questions (non-blocking for milestone)
 
@@ -221,10 +221,10 @@ git status: one modified file (`docs/project-status/milestone-reports/milestone-
 | 13) No app/infrastructure implementation introduced | PASS |
 | 14) Locked baseline unchanged | PASS |
 | 15) Validation checks pass | PASS |
-| 16) Repository clean after commit | BLOCKED — working tree currently has a non-functional line-ending-only modification in milestone report file. |
-| 17) Explicit product-owner approval | **BLOCKED — pending** |
+| 16) Repository clean after commit | PASS |
+| 17) Explicit product-owner approval | **BLOCKED ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â pending** |
 | 18) Completion report evidence completeness | PASS |
-| 19) Final completion status | **BLOCKED — pending explicit product-owner approval** |
+| 19) Final completion status | **BLOCKED ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â pending explicit product-owner approval** |
 
 ## 19) No implementation confirmation
 
