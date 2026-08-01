@@ -19,13 +19,15 @@
 
 This document is normative for Release 1.
 
-Priority:
+Authoritative precedence for Release 1:
 
-1. `project-plan/00_locked_product_baseline.md`
-2. Product decisions and approvals recorded in this milestone’s supporting files
-3. This PRD
+1. `project-plan/00_locked_product_baseline.md` (immutable, source of truth for locked decisions)
+2. This PRD (the sole detailed, normative functional specification for Release 1 after product-owner approval)
+3. Supporting evidence documents: milestone reports, traceability artifacts, glossary, decision log, and approval records.
 
-Conflicts are resolved by taking the immutable locked baseline as priority.
+Supporting evidence documents are contextual, traceable, and do not override this PRD.
+
+If a conflict appears between the locked baseline and this PRD, approval is blocked until resolved explicitly by the product owner.
 
 ## 3. Product vision
 
@@ -114,8 +116,12 @@ An active location entitlement unlocks messaging and operational capabilities fo
 | --- | --- | --- |
 | CREATED | Location record exists but is not yet operational | -> AWAITING_SUBSCRIPTION_OR_TRIAL |
 | AWAITING_SUBSCRIPTION_OR_TRIAL | Location exists and awaits subscription or trial initiation | -> AWAITING_ADMIN_APPROVAL |
-| AWAITING_ADMIN_APPROVAL | Preconditions are complete but administrator approval is pending | -> TRIAL_ACTIVE, -> PAID_ACTIVE, -> CANCELLED |
-| TRIAL_ACTIVE | Trial is active with admin gating and payment prerequisites | -> PAID_ACTIVE, -> TRIAL_EXHAUSTED, -> CANCELLED |
+| AWAITING_ADMIN_APPROVAL | Preconditions are complete but administrator approval is pending | -> TRIAL_REQUESTED, -> PAID_ACTIVE, -> CANCELLED |
+| TRIAL_REQUESTED | Trial request exists and waits for admin and billing prerequisites | -> PENDING_ADMIN_APPROVAL, -> TRIAL_CANCELLED |
+| PENDING_ADMIN_APPROVAL | Admin approval is pending; payment and request prerequisites captured | -> TRIAL_ACTIVE, -> TRIAL_CANCELLED |
+| TRIAL_ACTIVE | Trial is active with admin gating and payment prerequisites | -> TRIAL_SMS_PAUSED, -> TRIAL_CANCELLED, -> MONTHLY_ACTIVE |
+| TRIAL_SMS_PAUSED | Trial active but SMS is currently paused after limit exhaustion | -> MONTHLY_ACTIVE, -> TRIAL_CANCELLED |
+| MONTHLY_ACTIVE | Trial converted to monthly software entitlement | -> PAID_ACTIVE |
 | PAID_ACTIVE | Location has active paid entitlement | -> PAST_DUE, -> SMS_RESTRICTED, -> SUSPENDED, -> CANCELLED |
 | PAST_DUE | Payment failed and entitlements are restricted pending recovery | -> PAID_ACTIVE, -> SUSPENDED |
 | SMS_RESTRICTED | Overage spending cap has been reached or failed | -> PAID_ACTIVE, -> SUSPENDED |
@@ -144,23 +150,32 @@ Trial behavior applies per location when business onboarding enters trial state.
 
 | State | Meaning | Transition rule | Notes |
 | --- | --- | --- | --- |
-| CREATED | Trial registration requested | -> AWAITING_APPROVAL after approval gating | Clock does not start before admin approval |
-| AWAITING_APPROVAL | All prerequisites collected, waiting on admin review | -> TRIAL_ACTIVE on approval, remains while blocked otherwise | Payment method requirement is mandatory |
-| TRIAL_ACTIVE | Trial currently active | -> TRIAL_EXHAUSTED on 100 segment usage, -> TRIAL_CANCELLED on cancellation, -> TRIAL_TO_PAID on completion without cancel | Trial length is 14 days unless otherwise terminated |
-| TRIAL_EXHAUSTED | Trial SMS allowance exceeded | -> TRIAL_ACTIVE if SMS limit reset only by plan end; queue and status remain active; SMS dispatch restricted | Queue and live status remain available |
-| TRIAL_CANCELLED | Business cancelled trial | terminal with no paid conversion | SMS and queue behavior follow cancellation policy |
-| TRIAL_TO_PAID | Trial ends by time or conversion | -> PAID_TRIAL_CONVERT if not canceled, -> TRIAL_CANCELLED if canceled | Monthly starts automatically unless canceled |
+| TRIAL_REQUESTED | Trial request captured and waiting for prerequisite collection | -> PENDING_ADMIN_APPROVAL after initial request validation | Timer does not start in this state |
+| PENDING_ADMIN_APPROVAL | Payment method is captured and request is waiting for admin review | -> TRIAL_ACTIVE when admin approves; -> TRIAL_CANCELLED when explicitly cancelled or rejected | Admin approval is required before the trial clock starts |
+| TRIAL_ACTIVE | Trial is active and SMS allowances are being consumed | -> TRIAL_SMS_PAUSED when SMS usage reaches 100 provider-billed segments; -> MONTHLY_ACTIVE when 14-day clock expires and not cancelled; -> TRIAL_CANCELLED if cancelled | Trial length is exactly 14 days; queue and status remain available |
+| TRIAL_SMS_PAUSED | Trial remains active but SMS sending is paused due to trial SMS exhaustion | -> MONTHLY_ACTIVE when 14-day trial clock expires; -> TRIAL_CANCELLED if cancelled | Queue and browser status continue while SMS is paused |
+| MONTHLY_ACTIVE | Trial ended without cancellation and converted to monthly software subscription | terminal conversion state for trial flow | Monthly path is active by default unless annual is explicitly selected |
 
-### 12.2 Trial rules
+### 12.2 Cancellation transition
 
-- Trial duration is 14 days.
-- Trial requires payment method on file before trial activation.
-- Trial requires platform-administrator approval before activation.
-- Trial includes 100 included SMS segments.
-- Trial does not generate paid overages.
-- On SMS allowance exhaustion, trial messaging pauses while queue and live status remain available.
-- Trial may continue for status/check-in features without SMS sending.
-- Monthly paid subscription is not automatically started until trial ends and approval conditions remain valid.
+| State before cancellation | State after cancellation | Requirement |
+| --- | --- | --- |
+| TRIAL_REQUESTED | TRIAL_CANCELLED | Request is not activated without approval. |
+| PENDING_ADMIN_APPROVAL | TRIAL_CANCELLED | Trial does not start without explicit approval. |
+| TRIAL_ACTIVE | TRIAL_CANCELLED | Queue and status behavior continue without queue SMS in the same request context as configured for existing continuity. |
+| TRIAL_SMS_PAUSED | TRIAL_CANCELLED | Existing queue entries continue to use browser status with no queue SMS. |
+
+### 12.3 Trial rules
+
+- Trial duration is exactly 14 days.
+- Payment method must exist before activation.
+- Administrator approval must occur before the trial clock starts.
+- At 100 provider-billed segments, SMS sending pauses.
+- There is no allowance reset during a single trial period.
+- Queue operations, customer check-in, and browser status continue while SMS is paused.
+- Trial SMS exhaustion does not stop queue functionality or status checks.
+- Annual billing begins only after an explicit annual-plan selection (monthly remains the default at trial conversion).
+- Uncancelled trials convert to monthly software subscription via `MONTHLY_ACTIVE`.
 
 ## 13. Paid subscription lifecycle
 
@@ -187,7 +202,23 @@ Subscription is location-scoped.
 - Annual billing is location-based and does not create per-business discounts.
 - Annual software charges are collected annually.
 - Annual subscribers still follow monthly SMS billing behavior.
-- Trial-to-paid transition is to monthly unless explicit annual selection exists.
+- Trial conversion defaults to monthly unless an explicit annual-plan selection is made.
+
+### 13.3 Established-location definition (location-scoped)
+
+An established location is a **subscribed location** that satisfies all of the following:
+
+- It has completed **two consecutive successfully settled billing cycles**.
+- It has a successfully paid initial software subscription.
+- It has no unresolved failed or disputed invoice.
+- A monthly messaging cycle with zero amount due counts as successfully settled.
+- Monthly and annual software subscription paths use the same establishment rule.
+
+Additional establishment rules:
+
+- Retention of billing and entitlement state is **per location** only.
+- SMS allowance and spending limit are retained per location.
+- Establishment status does not transfer between locations, even when in the same organization.
 
 ## 14. SMS billing lifecycle
 
@@ -258,21 +289,33 @@ Lifecycle states:
 - REMOVED
 - EXPIRED
 
-Transition intent and normative rules:
+Lifecycle transitions are normative and testable:
 
-- WAITING → CALLED is triggered by queue operator action.
-- CALLED → SERVING is triggered when service starts.
-- SERVING → COMPLETED when operator finalizes service.
-- WAITING → NO_SHOW after hold window expiration.
-- WAITING → CANCELLED when customer requests leave.
-- CALLED → REMOVED for manual removal.
-- Serving/active entries may transition to NO_SHOW if policy allows and state checks permit.
-- Any terminal state requires immutable audit record.
-- EXPIRED is terminal and must not transition to active states.
-- Invalid transitions (for example WAITING→COMPLETED, COMPLETED→WAITING, SERVING→CALLED) are invalid and MUST fail atomically with explicit operator-visible errors.
-- Simultaneous-operation conflicts:
-  - Concurrent mutations for the same queue entry must be conflict-checked.
-  - Stale writes MUST be rejected deterministically; only one valid state transition may be committed.
+| Current state | Next states | Rule |
+| --- | --- | --- |
+| WAITING | CALLED, CANCELLED, REMOVED, EXPIRED | Entry is admitted, may be cancelled by customer, manually removed by an authorized operator, or marked expired by cleanup policy. |
+| CALLED | SERVING, NO_SHOW, CANCELLED, REMOVED | No-show hold timer starts at `called_at`. |
+| SERVING | COMPLETED | Service must be started before completion. |
+| COMPLETED | (terminal) | No further transitions are allowed without an explicitly authorized administrator recovery process. |
+| CANCELLED | (terminal) | No further transitions are allowed without an explicitly authorized administrator recovery process. |
+| NO_SHOW | (terminal) | No further transitions are allowed without an explicitly authorized administrator recovery process. |
+| REMOVED | (terminal) | No further transitions are allowed without an explicitly authorized administrator recovery process. |
+| EXPIRED | (terminal) | No further transitions are allowed without an explicitly authorized administrator recovery process. |
+
+No-show behavior:
+
+- The no-show hold timer starts when the entry enters `CALLED` and ends at `called_at + configured hold` (default five minutes).
+- The only valid incoming transition to `NO_SHOW` is from `CALLED`.
+- A `CALLED` entry at hold expiry MUST be manually confirmed by staff as `NO_SHOW`.
+- `WAITING` and `SERVING` entries MAY NOT transition directly to `NO_SHOW`.
+- The system MAY expose a visible `called hold expired` indicator.
+
+Simultaneous-operation controls:
+
+- Only one transition for a queue entry is valid within a single conflict domain.
+- Concurrent conflicting mutations for the same queue entry MUST be conflict-checked.
+- Stale writes MUST be rejected; only one valid transition may be committed.
+- Invalid transitions MUST fail atomically with an explicit operator-visible conflict or state error.
 
 ## 18. Queue ordering and concurrency rules
 
@@ -290,12 +333,20 @@ Check-in is QR-first with mandatory fields and configurable policies.
 
 - Required: mobile number and name or nickname.
 - Optional: service selection.
-- Optional business policy controls remote join and advance join.
-- Operating-hours policy applies to customer joining unless explicitly overridden.
+- Remote joining is configurable:
+  - Enabled: location may expose a standard shareable join link.
+  - Disabled: customer joining is limited to the QR route and staff-assisted check-in only.
+- Advance joining is configurable:
+  - Enabled: customers may join outside normal walk-in period where explicitly allowed.
+  - Disabled: customers join only while walk-in period is open.
+- Mobile QR links are shareable; no physical-presence guarantee is implied by static QR sharing.
+- Geolocation enforcement, rotating presence codes, and anti-sharing controls are deferred unless separately approved.
+- Operating-hours policy applies to customer joining unless explicitly overridden for advance joining.
 
 ## 20. Staff-assisted check-in
 
 Staff-assisted manual check-in MUST remain available as a fallback path when customer self-check-in is not possible.
+- Staff-assisted check-in must apply the same queue-SMS consent capture requirements as QR check-in.
 
 ## 21. Services and custom questions
 
@@ -308,6 +359,11 @@ Custom questions constraints:
 - No file-upload questions.
 - No collection of medical, government ID, payment-card, password, or credential details.
 - Sensitive-data warning MUST be shown before collection.
+- Business owners MUST attest that custom questions do not request prohibited data.
+- The system MUST block prohibited question types and SHOULD flag obvious prohibited labels/patterns.
+- Automated detection is defense-in-depth and not a perfect classifier.
+- Administrator enforcement controls MUST support violation remediation and suspension.
+- Sensitive-question enforcement violations MUST be auditable.
 
 ## 22. Customer status experience
 
@@ -322,6 +378,9 @@ Wait estimation is queue-state and historical-service-time based per queue polic
 ## 24. No-show and extension behavior
 
 - Default no-show hold = five minutes.
+- `NO_SHOW` is only reachable from `CALLED`.
+- `WAITING` and `SERVING` cannot transition directly to `NO_SHOW`.
+- No-show in `CALLED` requires explicit staff confirmation after hold expiry.
 - Businesses may configure extension behavior.
 - Extensions are bounded by policy, per-business settings, and location controls.
 
@@ -347,6 +406,14 @@ Notification semantics:
 - Billing must be charged by provider-billed segment usage, not send-operation count.
 - Template previews MUST show predicted segment count.
 - Templates must be English-first and localization-ready.
+
+Consent for queue SMS:
+
+- Queue SMS MUST be sent only after explicit queue messaging consent is captured.
+- Consent capture MUST record phone number, location, queue entry, timestamp, consent-text version, and capture method.
+- Queue consent MUST be separate from marketing consent.
+- Customers who decline queue SMS consent must not receive SMS but retain browser-status access.
+- Staff-assisted and QR join must use identical queue-consent behavior.
 
 ## 26. Android business application requirements
 
@@ -548,7 +615,7 @@ Release 1 is complete only when every required milestone through Milestone 30 is
 | PRD-SUB-015 | Overage segments MUST cost 0.03 USD each. | Reconciliation formulas show 0.03 per additional provider-billed segment. | M12 | Billing engine | High |
 | PRD-SUB-016 | Default monthly overage limit MUST be 50 USD per location. | Overages stop when 50 USD is reached without override. | M14 | Billing engine | High |
 | PRD-SUB-017 | New locations MUST be treated as controlled postpaid businesses. | New paid businesses are in controlled postpaid mode. | M14 | Billing model | Medium |
-| PRD-SUB-018 | A business MUST be considered established after two successful paid cycles. | State becomes established after two paid cycles complete. | M14 | Billing model | Medium |
+| PRD-SUB-018 | A location MUST become established only after two consecutive successfully settled billing cycles on that same location. | State is achieved when the location has two paid billing settlements, including zero-overage settlements, with no unresolved failed/disputed invoice. | M14 | Billing model | Medium |
 | PRD-SUB-019 | Established businesses MUST remain in postpaid mode. | Established state does not downgrade from postpaid. | M14 | Billing policy | Medium |
 | PRD-SUB-020 | Annual software charges MUST be billed annually. | Annual plan charge occurs once per year per active location. | M13 | Billing engine | High |
 | PRD-SUB-021 | Annual subscribers MUST receive monthly SMS overage billing. | Overage invoices are generated per monthly messaging cycle. | M13, M12 | Billing engine | Medium |
@@ -558,7 +625,7 @@ Release 1 is complete only when every required milestone through Milestone 30 is
 | Requirement ID | Requirement statement | Acceptance condition | Responsible future milestone | Actor/Surface | Risk |
 | --- | --- | --- | --- | --- | --- |
 | PRD-LOC-001 | Locations MUST support multiple queues. | Multiple queue entities may be active per location. | M21 | Location management | Medium |
-| PRD-QUEUE-001 | Each queue entry MUST represent one person only. | Duplicate person-attribution per active entry is prevented by queue-entry invariants. | M22 | Queue model | High |
+| PRD-QUEUE-001 | Each queue entry MUST represent one customer only and may not represent a party. | One queue entry maps to one customer record only; same person may rejoin later through a separate valid entry. | M22 | Queue model | High |
 | PRD-QUEUE-002 | Queue ordering MUST default to FIFO. | By default, later entrants join at the tail unless reorder action is used. | M23 | Queue behavior | High |
 | PRD-QUEUE-003 | Manual reorder MUST require a non-empty reason and MUST be audited. | All reorder events include reason and audit record. | M23 | Queue operations | High |
 | PRD-QUEUE-004 | Service selection is optional and business-configurable. | Queue entry may omit service while retaining valid state transitions. | M21 | Queue configuration | Medium |
@@ -574,8 +641,8 @@ Release 1 is complete only when every required milestone through Milestone 30 is
 | PRD-CHECKIN-003 | Mobile number MUST be required. | Submissions without valid phone number are rejected. | M25 | Customer check-in | High |
 | PRD-CHECKIN-004 | Name or nickname MUST be required. | Submission without display name is rejected. | M25 | Customer check-in | Medium |
 | PRD-CHECKIN-005 | Service MUST be optional at check-in. | Service may be omitted without preventing entry creation. | M25, M21 | Customer check-in | Low |
-| PRD-CHECKIN-006 | Remote joining MUST be configurable. | The policy setting directly controls whether remote joining is allowed. | M25 | Business policy | Medium |
-| PRD-CHECKIN-007 | Advance joining MUST be configurable. | Advance-join behavior appears only when configured. | M25 | Business policy | Medium |
+| PRD-CHECKIN-006 | Remote joining MUST be configurable per location. | Remote joining enabled allows a standard shareable join link; disabled joins are restricted to QR and staff-assisted check-in. | M25 | Business policy | Medium |
+| PRD-CHECKIN-007 | Advance joining MUST be configurable per location. | Advance joining is active only when enabled and only applies outside currently open walk-in period. | M25 | Business policy | Medium |
 | PRD-CHECKIN-008 | Check-in must respect operating-hours policy by default. | Joins outside hours are rejected or deferred per policy setting. | M25 | Business policy | Medium |
 | PRD-CHECKIN-009 | Customers MUST be able to leave queue immediately. | A customer-initiated leave transitions queue state to CANCELLED. | M24, M26 | Customer status | Medium |
 
@@ -588,7 +655,6 @@ Release 1 is complete only when every required milestone through Milestone 30 is
 | PRD-CUSTOM-003 | File-upload custom questions MUST NOT be supported. | Upload input is rejected and not exposed. | M21 | Queue configuration | Medium |
 | PRD-CUSTOM-004 | Medical information, government ID, payment-card, password, and credentials MUST NOT be requested. | Validation blocks these categories. | M21 | Check-in data policy | High |
 | PRD-CUSTOM-005 | Sensitive-data warning MUST be shown before question display. | Warning appears before any custom-question answer flow. | M21 | Customer check-in | Medium |
-| PRD-CUSTOM-006 | Identifiable custom answers MUST be retained for 30 days. | Answer records are deleted or de-identified after 30 days. | M30 | Data lifecycle | High |
 
 ### 39.6 Messaging requirements
 
@@ -610,7 +676,7 @@ Release 1 is complete only when every required milestone through Milestone 30 is
 | --- | --- | --- | --- | --- | --- |
 | PRD-STATUS-001 | Customer status experience MUST be private. | Each customer sees only own queue status and queue entry context. | M26 | Customer status page | High |
 | PRD-WAIT-001 | Wait estimation MUST be provided where supported. | Status page presents wait estimation in supported states. | M24 | Customer status | Medium |
-| PRD-NOSHOW-001 | No-show transition MUST occur after configured hold period. | NO_SHOW occurs automatically when hold window elapses unresponsive. | M24 | Queue operations | High |
+| PRD-NOSHOW-001 | No-show must be recorded only when explicitly confirmed by staff after hold expiry in `CALLED`. | NO_SHOW cannot be auto-applied and must not occur from `WAITING` or `SERVING`. | M24 | Queue operations | High |
 | PRD-NOSHOW-002 | Extension MUST follow policy and policy limits. | Extension is accepted only when allowed and within configured limits. | M24 | Customer/queue operations | Medium |
 
 ### 39.8 Platform surfaces and operations requirements
@@ -631,7 +697,7 @@ Release 1 is complete only when every required milestone through Milestone 30 is
 | --- | --- | --- | --- | --- | --- |
 | PRD-PRIV-001 | Identifiable customer data (name, phone, custom answers) MUST be retained for 30 days. | Data lifecycle deletes or archives entries after 30 days as specified. | M30 | Data lifecycle | High |
 | PRD-PRIV-002 | Customer phone export MUST NOT occur by default. | No default export path includes phone fields. | M30 | Admin/owner tools | Medium |
-| PRD-PRIV-003 | Queue consent and marketing consent MUST be kept distinct. | UX language and data model distinguish queue consent only. | M30 | Consent flows | Medium |
+| PRD-PRIV-003 | Queue SMS consent must be explicit and separate from marketing consent. | Queue messaging is sent only after capturing queue-consent with phone, location, queue entry, timestamp, text-version, and capture method; declined consent suppresses SMS only. | M30 | Consent flows | Medium |
 | PRD-PRIV-004 | Queue phone numbers MUST NOT be used for advertising. | No ad-targeting behavior may consume queue phone numbers. | M30 | Messaging/policy | High |
 | PRD-PRIV-005 | Authorized staff MAY view complete customer phone numbers. | Authorized roles can access complete values. | M30 | Queue operations | Medium |
 | PRD-PRIV-006 | Phone-number access MUST be auditable. | Every full-number view action is logged. | M30 | Audit layer | High |

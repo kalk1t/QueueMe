@@ -21,6 +21,8 @@
 | Serving | Queue state indicating service is currently in progress for the entry. |
 | Completed | Queue state indicating service for entry is finished. |
 | No-show | Queue state indicating customer did not appear within allowed no-show window. |
+| Called hold | The configured interval that starts when an entry enters `CALLED` and ends when hold-based no-show confirmation becomes required. |
+| No-show confirmation | The explicit staff action that transitions an entry from `CALLED` to `NO_SHOW` after the called hold expiry. |
 | Customer extension | A temporary hold allowing a customer more time to arrive/return. |
 | Trial | Temporary subscription state lasting 14 days with reduced SMS entitlement. |
 | Billing cycle | Calendar period used to compute location software charges for recurring subscription. |
@@ -29,12 +31,16 @@
 | Overage segment | Additional provider-billed segment beyond allowance that may incur cost. |
 | Provider-billed segment | SMS segment count reported by provider telemetry for chargeability. |
 | Spending limit | Per-location maximum amount enforceable for SMS overage charges. |
-| Established business | Organization location that completed two successful paid billing cycles. |
+| Established location | Location that completed two consecutive successfully settled billing cycles and has no unresolved failed/disputed invoice. |
 | Dedicated messaging number | Single outbound/inbound message-capable phone number assigned to one active subscribed location. |
 | Consent | Explicit user agreement required for the requested communication action. |
 | Queue consent | Consent specific to queue operational messaging only. |
 | Marketing consent | Consent for commercial marketing; separate from queue consent. |
 | Identifiable customer data | Data that can identify an individual customer, including name, phone, and custom answers. |
+| Remote joining | A check-in pathway that allows customers to join using a non-codescan route, typically via a standard link. |
+| Advance joining | A check-in capability allowing customers to join before/after a queue is actively open according to configured operating-hours rules. |
+| QR join route | A check-in path where queue entry creation begins from a location QR scan entry point. |
+| Shareable join link | A reusable link that routes to a queue check-in entry point while not guaranteeing physical presence. |
 | Tenant | One organization and all resources that must be isolated from other organizations. |
 | Tenant isolation | Enforced separation of data and actions between organizations. |
 | Audit event | An immutable (or tamper-evident) record of a security, billing, or state action. |

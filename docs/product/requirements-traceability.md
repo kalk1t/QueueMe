@@ -1,4 +1,4 @@
-# Release 1 Requirements Traceability Matrix
+﻿# Release 1 Requirements Traceability Matrix
 
 ## 1) Baseline to PRD mapping
 
@@ -31,7 +31,7 @@
 | `00_locked_product_baseline.md` (Pricing and billing) | PRD-SUB-015 | Overages charged at 0.03 USD per segment | M12 | M30 | Billing ledger review | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Pricing and billing) | PRD-SUB-016 | Default overage limit 50 USD | M14 | M30 | Overage cap review | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Pricing and billing) | PRD-SUB-017 | New businesses controlled postpaid | M14 | M30 | Entitlement profile review | BLOCKED — pending approval |
-| `00_locked_product_baseline.md` (Pricing and billing) | PRD-SUB-018 | Established after two paid cycles | M14 | M30 | Billing state review | BLOCKED — pending approval |
+| `00_locked_product_baseline.md` (Pricing and billing) | PRD-SUB-018 | Established on location only after two consecutive successfully settled cycles on that same location | M14 | M30 | Billing state review | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Pricing and billing) | PRD-SUB-019 | Established businesses remain postpaid | M14 | M30 | Entitlement profile review | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Pricing and billing) | PRD-SUB-020 | Annual software billed annually | M13 | M30 | Software invoice cadence review | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Pricing and billing) | PRD-SUB-021 | Annual software + monthly SMS overages | M13, M12 | M30 | Combined billing review | BLOCKED — pending approval |
@@ -42,7 +42,7 @@
 | `00_locked_product_baseline.md` (Queue and ownership) | PRD-ONBOARD-001 | Admin approval before operational activation | M09 | M30 | Approval-state evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Queue and ownership) | PRD-ONBOARD-002 | Admin approval required for limit increases | M14 | M30 | Spending-cap workflow evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Queue and structure) | PRD-LOC-001 | Multiple queues per location | M21 | M30 | Queue list evidence | BLOCKED — pending approval |
-| `00_locked_product_baseline.md` (Queue operation) | PRD-QUEUE-001 | One person per queue entry | M22 | M30 | Entry validation evidence | BLOCKED — pending approval |
+| `00_locked_product_baseline.md` (Queue operation) | PRD-QUEUE-001 | One queue entry maps to one customer only and does not represent a party or group | M22 | M30 | Entry validation evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Queue operation) | PRD-QUEUE-002 | FIFO ordering default | M23 | M30 | Ordering evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Queue operation) | PRD-QUEUE-003 | Audited manual reordering with reason | M23 | M30 | Reorder audit evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Queue structure) | PRD-QUEUE-004 | Business-configurable services | M21 | M30 | Service field evidence | BLOCKED — pending approval |
@@ -58,8 +58,8 @@
 | `00_locked_product_baseline.md` (Customer check-in) | PRD-CHECKIN-003 | Mandatory mobile number for check-in | M25 | M30 | Validation evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Customer check-in) | PRD-CHECKIN-004 | Name or nickname required | M25 | M30 | Check-in validation evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Customer check-in) | PRD-CHECKIN-005 | Optional service at check-in | M25 | M30 | Service option behavior evidence | BLOCKED — pending approval |
-| `00_locked_product_baseline.md` (Customer check-in) | PRD-CHECKIN-006 | Remote joining configurable | M25 | M30 | Policy evidence | BLOCKED — pending approval |
-| `00_locked_product_baseline.md` (Customer check-in) | PRD-CHECKIN-007 | Advance joining configurable | M25 | M30 | Policy evidence | BLOCKED — pending approval |
+| `00_locked_product_baseline.md` (Customer check-in) | PRD-CHECKIN-006 | Remote joining enabled by location policy via shareable join link; disabled when QR/staff-only mode is used | M25 | M30 | Policy evidence | BLOCKED — pending approval |
+| `00_locked_product_baseline.md` (Customer check-in) | PRD-CHECKIN-007 | Advance joining is configurable and applies only outside current open walk-in windows when enabled | M25 | M30 | Policy evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Customer check-in) | PRD-CHECKIN-008 | Check-in respects operating hours | M25 | M30 | Queue-hour policy evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Customer check-in) | PRD-CHECKIN-009 | Customers may leave queue immediately | M24, M26 | M30 | Leave behavior evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Customer check-in) | PRD-CUSTOM-001 | Max five active custom questions per queue | M21 | M30 | Question count validation evidence | BLOCKED — pending approval |
@@ -67,7 +67,6 @@
 | `00_locked_product_baseline.md` (Customer check-in) | PRD-CUSTOM-003 | No file-upload custom questions | M21 | M30 | Question input validation evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Customer check-in) | PRD-CUSTOM-004 | Prohibited sensitive content categories | M21 | M30 | Validation evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Customer check-in) | PRD-CUSTOM-005 | Sensitive-data warning required | M21 | M30 | Warning UX evidence | BLOCKED — pending approval |
-| `00_locked_product_baseline.md` (Customer check-in) | PRD-CUSTOM-006 | Custom answers retained 30 days | M30 | M30 | Data-retention evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Messaging) | PRD-SMS-001 | Default SMS event set | M18 | M30 | Event catalog evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Messaging) | PRD-SMS-002 | Disable individual events | M18 | M30 | Event toggle evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Messaging) | PRD-SMS-003 | Template customization | M18 | M30 | Template edit evidence | BLOCKED — pending approval |
@@ -79,7 +78,7 @@
 | `00_locked_product_baseline.md` (Messaging) | PRD-SMS-009 | One dedicated number per active location | M17 | M30 | Number assignment evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Status and wait) | PRD-STATUS-001 | Private live status experience | M26 | M30 | Status privacy evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Status and wait) | PRD-WAIT-001 | Wait estimates presented to customer | M24 | M30 | Wait-estimation evidence | BLOCKED — pending approval |
-| `00_locked_product_baseline.md` (No-show) | PRD-NOSHOW-001 | No-show transition after hold window | M24 | M30 | No-show transition evidence | BLOCKED — pending approval |
+| `00_locked_product_baseline.md` (No-show) | PRD-NOSHOW-001 | No-show is only recorded after staff confirmation from CALLED after hold timeout | M24 | M30 | No-show transition evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (No-show) | PRD-NOSHOW-002 | Extension request under policy | M24 | M30 | Extension behavior evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Platform surfaces) | PRD-PLAT-001 | Native Android business application | M27 | M30 | Android app evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Platform surfaces) | PRD-PLAT-002 | Android min version 12 | M27 | M30 | OS target evidence | BLOCKED — pending approval |
@@ -91,7 +90,7 @@
 | `00_locked_product_baseline.md` (Platform surfaces) | PRD-WEB-005 | Kiosk/public display deferred unless pilot | M30 | M30 | Scope evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Privacy and retention) | PRD-PRIV-001 | Retain identifiers for 30 days | M30 | M30 | Retention evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Privacy and retention) | PRD-PRIV-002 | No default phone export | M30 | M30 | Export policy evidence | BLOCKED — pending approval |
-| `00_locked_product_baseline.md` (Privacy and retention) | PRD-PRIV-003 | Queue consent vs marketing consent | M30 | M30 | Consent UI evidence | BLOCKED — pending approval |
+| `00_locked_product_baseline.md` (Privacy and retention) | PRD-PRIV-003 | Queue SMS consent explicit and separate from marketing; capture must include phone, location, queue entry, timestamp, text version, capture method | M30 | M30 | Consent capture and audit evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Privacy and retention) | PRD-PRIV-004 | No advertising use of phone numbers | M30 | M30 | Privacy policy evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Privacy and retention) | PRD-PRIV-005 | Staff may view full phone numbers | M30 | M30 | Role access evidence | BLOCKED — pending approval |
 | `00_locked_product_baseline.md` (Privacy and retention) | PRD-PRIV-006 | Phone-number access auditable | M30 | M30 | Access log evidence | BLOCKED — pending approval |
@@ -167,7 +166,6 @@
 | PRD-CUSTOM-003 | M21 | M21 |
 | PRD-CUSTOM-004 | M21 | M21 |
 | PRD-CUSTOM-005 | M21 | M21 |
-| PRD-CUSTOM-006 | M30 | M30 |
 | PRD-SMS-001 | M18 | M18 |
 | PRD-SMS-002 | M18 | M18 |
 | PRD-SMS-003 | M18 | M18 |
