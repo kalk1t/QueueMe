@@ -175,9 +175,9 @@
 
 - Starting commit: `d1ed7e8c272ac2339c055a9dccf885c879e16ef5`
 - Architecture specification commit: `95ba0ee`
-- Review record commit: pending
+- Review record commit: `76af683`
 - Validation commit: `not separately committed`
-- Evidence / completion commit: pending
+- Evidence / completion commit: `76af683`
 
 ## 20) Validation status
 
