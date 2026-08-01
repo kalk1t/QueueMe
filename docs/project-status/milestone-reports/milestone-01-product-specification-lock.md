@@ -1,9 +1,9 @@
-# Milestone 01 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Product Specification Lock Report
+# Milestone 01 - Product Specification Lock Report
 
 ## 1) Milestone result
 
-- Milestone: Milestone 01 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Product Specification Lock
-- Final status: **BLOCKED ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â pending explicit product-owner approval**
+- Milestone: Milestone 01 - Product Specification Lock
+- Final status: **BLOCKED - pending explicit product-owner approval**
 - Start timestamp: 2026-08-01
 - Completion timestamp: 2026-08-01 (validation and report finalization completed)
 
@@ -12,7 +12,7 @@
 - Branch at start: `main`
 - Commit at start: `f34cbf0c2216bdc00c44a5a0e646b42748119069`
 - Working tree at start: clean
-- Remote: `origin` ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ `https://github.com/kalk1t/QueueMe.git`
+- Remote: `origin` -> `https://github.com/kalk1t/QueueMe.git`
 - Existing test/build capability: no runnable application code; no framework build/test commands available for this repository phase.
 - Deployed environment state: not deployed; no production or staging environments provisioned for this repository scope.
 
@@ -195,7 +195,7 @@ git status: clean
 ## 16) Unresolved risks
 
 - Product owner approval is still pending.
-- A few requirements are scoped to verification in later milestones (30, 11ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“30) and therefore cannot yet be execution-verified in this documentation milestone.
+- A few requirements are scoped to verification in later milestones (30, 11-30) and therefore cannot yet be execution-verified in this documentation milestone.
 
 ## 17) Deferred questions (non-blocking for milestone)
 
@@ -222,9 +222,9 @@ git status: clean
 | 14) Locked baseline unchanged | PASS |
 | 15) Validation checks pass | PASS |
 | 16) Repository clean after commit | PASS |
-| 17) Explicit product-owner approval | **BLOCKED ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â pending** |
+| 17) Explicit product-owner approval | **BLOCKED - pending** |
 | 18) Completion report evidence completeness | PASS |
-| 19) Final completion status | **BLOCKED ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â pending explicit product-owner approval** |
+| 19) Final completion status | **BLOCKED - pending explicit product-owner approval** |
 
 ## 19) No implementation confirmation
 
