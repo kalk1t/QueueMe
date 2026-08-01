@@ -8,6 +8,7 @@
 - Application code: Not initialized
 - Infrastructure: Not provisioned
 - Production environment: Not created
+- Milestone 01 evidence baseline: latest semantic revision `6d7224a5ca869b257e09da044d271cfc8edf6807`
 - Last updated: 2026-08-01
 
 ## Repository foundation note

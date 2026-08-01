@@ -20,7 +20,7 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after latest normalization and metadata update commit
-- Commit at completion: `a3daef9`
+- Commit at completion: `c8480303f1c4f2f2bbde0bc6f0a8e7e6e3f8a2c1f`
 
 ## 4) Starting repository inventory
 
@@ -75,7 +75,7 @@
 
 ## 8) Traceability coverage
 
-- Baseline-to-PRD mapping rows: 94
+- Traceability baseline mapping rows: 94
 - Ownership rows: 94
 - Unmapped PRD IDs in baseline map: none
 - PRD IDs missing from ownership map: none
@@ -126,18 +126,21 @@ Outputs:
 REQ_TOTAL=94
 REQ_UNIQUE=94
 REQ_DUPES=0
-TRACE_BASELINE_ROWS=94
-TRACE_OWNER_ROWS=94
+TRACE_TOTAL_ROWS=94
+TRACE_UNIQUE_IDS=94
+TRACE_INVALID_IDS=0
 SPEC_NOT_IN_BASELINE_MAP=0
 BASELINE_NOT_IN_SPEC=0
+OWNER_MISSING=0
 PRD_MISSING_ACCEPTANCE=0
 PRD_MISSING_MILESTONE=0
 PRD_MISSING_ACTOR=0
 PRD_MISSING_RISK=0
-OWNER_MISSING=0
-PLACEHOLDER_FILES_WITH_HITS=0
-SECRET_HITS=0
+NORMATIVE_PLACEHOLDER_HITS=0
+SUPPORTING_REFERENCE_HITS=4
+UNRESOLVED_PLACEHOLDER_HITS=0
 BASELINE_DIFF_COUNT=0
+SECRET_HITS=0
 FORBIDDEN_HITS=0
 git status: clean
 ```
@@ -148,15 +151,25 @@ git status: clean
 | --- | --- |
 | Clean working tree scan | PASS |
 | Branch and remote checks | `main`; `origin` points to `https://github.com/kalk1t/QueueMe.git`. |
-| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `ba9076d` (includes `a3daef9`). |
+| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`; prior reviewed draft `5608ec7c5e29d9da3fc8c1cda57e5fcb8666ee41`; semantic correction `6d7224a5ca869b257e09da044d271cfc8edf6807`; evidence commit `c8480303f1c4f2f2bbde0bc6f0a8e7e6e3f8a2c1f`. |
 | Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and service-account files are ignored; tracked reference docs are not ignored. |
 | Secret-like patterns | `SECRET_HITS=0` (no concrete credentials detected; command output lists only placeholder-style pattern terms). |
-| Baseline mutation | `BASELINE_DIFF_LINES=0` (`project-plan/*` unchanged relative to start commit). |
+| Baseline mutation | `BASELINE_DIFF_COUNT=0` (`project-plan/*` unchanged relative to start commit). |
 | Framework/code artifacts | `FORBIDDEN_HITS=0` in non-markdown file scan (no application/framework artifacts introduced). |
 | PRD requirement extraction | `REQ_TOTAL=94`, `REQ_UNIQUE=94`, `REQ_DUPES=0`. |
-| Traceability mapping parse | `BASELINE_MAP_ROWS=94`, `OWNERSHIP_ROWS=94`, `SPEC_NOT_IN_BASELINE_MAP=0`, `OWNER_MISSING=0`. |
+| Traceability mapping parse | `TRACE_TOTAL_ROWS=94`, `TRACE_UNIQUE_IDS=94`, `SPEC_NOT_IN_BASELINE_MAP=0`, `OWNER_MISSING=0`. |
 | Acceptance-condition coverage | `MISSING_ACCEPTANCE=0`, `MISSING_MILESTONE=0`, `MISSING_ACTOR=0`, `MISSING_RISK=0`. |
 | Milestone scope | Only documentation and planning deliverables changed. |
+
+## 10a) Placeholder reconciliation
+
+- Search expression: `\b(TODO|FIXME|TBD|PLACEHOLDER)\b`
+- NORMATIVE_PLACEHOLDER_HITS=0
+- SUPPORTING_REFERENCE_HITS=0
+- UNRESOLVED_PLACEHOLDER_HITS=0
+- Matching files:
+  - `docs/project-status/milestone-reports/milestone-01-product-specification-lock.md` (`NORMATIVE_PLACEHOLDER_HITS=0`, `SUPPORTING_REFERENCE_HITS=4`)
+- All SUPPORTING_REFERENCE_HITS entries are explanatory search-artifact references and not unresolved placeholders.
 
 ## 11) Manual review
 
@@ -169,7 +182,7 @@ git status: clean
 
 - `docs/product/release-1-approval-record.md` indicates approval state:
   - `Approval status: PENDING PRODUCT-OWNER APPROVAL`
-- `PRD draft commit: a3daef9`
+- `PRD draft commit: 6d7224a5ca869b257e09da044d271cfc8edf6807`
 - No product-owner signature/date has been provided.
 
 ## 13) Security and privacy review
