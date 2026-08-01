@@ -20,7 +20,7 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after latest normalization and metadata update commit
-- Commit at completion: `31647a42f8e37abd4150cb5bc8beca0beae155dc`
+- Commit at completion: `9c60294929cea5a3e1bbcc9a270242ed50f0a660`
 
 ## 4) Starting repository inventory
 
@@ -134,10 +134,11 @@ PRD_MISSING_ACCEPTANCE=0
 PRD_MISSING_MILESTONE=0
 PRD_MISSING_ACTOR=0
 PRD_MISSING_RISK=0
-PLACEHOLDER_FILES_WITH_MARKERS=0
+OWNER_MISSING=0
+PLACEHOLDER_FILES_WITH_HITS=0
 SECRET_HITS=0
-BASELINE_DIFF_LINES=0
-FORBIDDEN_HITS=0 (non-markdown source scan)
+BASELINE_DIFF_COUNT=0
+FORBIDDEN_HITS=0
 git status: clean
 ```
 
@@ -147,7 +148,7 @@ git status: clean
 | --- | --- |
 | Clean working tree scan | PASS |
 | Branch and remote checks | `main`; `origin` points to `https://github.com/kalk1t/QueueMe.git`. |
-| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `31647a42f8e37abd4150cb5bc8beca0beae155dc`. |
+| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `9c60294929cea5a3e1bbcc9a270242ed50f0a660`. |
 | Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and service-account files are ignored; tracked reference docs are not ignored. |
 | Secret-like patterns | `SECRET_HITS=0` (no concrete credentials detected; command output lists only placeholder-style pattern terms). |
 | Baseline mutation | `BASELINE_DIFF_LINES=0` (`project-plan/*` unchanged relative to start commit). |
