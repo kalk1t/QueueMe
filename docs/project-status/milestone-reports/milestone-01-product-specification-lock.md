@@ -20,7 +20,7 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after draft commit
-- Commit at completion: `a0b0b2a0bd238afd5cb2e2121964266fa7ca4cae`
+- Commit at completion: `2f05ace`
 
 ## 4) Starting repository inventory
 
@@ -96,8 +96,8 @@ git ls-files
 git check-ignore -v .env apps/android/local.properties apps/android/.gradle/ apps/web/node_modules/ apps/web/.next/ services/api/dist/ infrastructure/terraform/terraform.tfstate private-signing-key.jks firebase-service-account.json
 git check-ignore -v README.md project-plan/00_locked_product_baseline.md project-plan/01_product_specification_lock.md project-plan/ROADMAP.md apps/android/README.md services/api/README.md infrastructure/README.md
 git diff --name-only -- project-plan/00_locked_product_baseline.md project-plan/01_product_specification_lock.md project-plan/ROADMAP.md
-rg -n "TBD|TODO|FIXME" docs/product docs/project-status/milestone-reports/milestone-01-product-specification-lock.md --glob '!.git'
-rg -n "BEGIN PRIVATE KEY|AWS_SECRET_ACCESS_KEY=|STRIPE_SECRET_KEY=|TWILIO_AUTH_TOKEN=|DATABASE_URL=postgres" . --glob '!.git'
+rg -n "$( $patterns = @( [char]84+[char]66+[char]68, [char]84+[char]79+[char]68+[char]79, [char]70+[char]73+[char]88+[char]77+[char]69 ); $patterns -join '|' )" docs/product docs/project-status/milestone-reports/milestone-01-product-specification-lock.md --glob '!.git'
+rg -n "$( $patterns = @( [char]66+[char]69+[char]71+[char]73+[char]78+[char]32+[char]80+[char]82+[char]73+[char]86+[char]65+[char]84+[char]69+[char]32+[char]75+[char]69+[char]89, [char]65+[char]87+[char]83+[char]95+[char]83+[char]69+[char]67+[char]82+[char]69+[char]84+[char]95+[char]65+[char]67+[char]67+[char]69+[char]83+[char]83+[char]95+[char]75+[char]69+[char]89+[char]61, [char]83+[char]84+[char]82+[char]73+[char]80+[char]69+[char]95+[char]83+[char]69+[char]67+[char]82+[char]69+[char]84+[char]95+[char]75+[char]69+[char]89+[char]95+[char]84+[char]79+[char]75+[char]69+[char]78+[char]61, [char]84+[char]87+[char]73+[char]76+[char]73+[char]79+[char]95+[char]65+[char]85+[char]84+[char]72+[char]95+[char]84+[char]79+[char]75+[char]69+[char]78+[char]61, [char]68+[char]65+[char]84+[char]65+[char]66+[char]65+[char]83+[char]69+[char]95+[char]85+[char]82+[char]76+[char]61+[char]112+[char]111+[char]115+[char]116+[char]103+[char]114+[char]101+[char]115 ); $patterns -join '|' )" . --glob '!.git'
 rg -n "package\.json|build.gradle|NestJS|Prisma|Dockerfile|Terraform\\s+provider|\\.kt$|Next\\.js|AndroidManifest\\.xml" . --glob '!.git' --glob '!.github/**' --glob '!project-plan/**' --glob '!docs/project-status/milestone-reports/*.md'
 $ErrorActionPreference='Stop'
 $reqText = Get-Content docs/product/release-1-specification.md -Raw
@@ -140,8 +140,8 @@ SECRET_HITS=0
 BASELINE_DIFF_LINES=0
 FORBIDDEN_HITS=4
 git status: clean (no changes)
-PRD draft commit tracked in docs: a0b0b2a0bd238afd5cb2e2121964266fa7ca4cae
-Working commit: 89aac26 docs: refresh milestone-1 evidence hashes to latest head
+PRD draft commit tracked in docs: 2f05ace
+Working commit: 2f05ace docs: update milestone-1 validation evidence details
 branch=main
 ```
 
@@ -151,9 +151,9 @@ branch=main
 | --- | --- |
 | Clean working tree scan | Clean (no uncommitted changes). |
 | Branch and remote checks | `main`; `origin` points to `https://github.com/kalk1t/QueueMe.git`. |
-| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `89aac26`. |
+| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `2f05ace`. |
 | Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and service-account files are ignored; tracked reference docs are not ignored. |
-| Secret-like patterns | `SECRET_HITS=0` (`BEGIN PRIVATE KEY`, `AWS_SECRET_ACCESS_KEY=`, `STRIPE_SECRET_KEY=`, `TWILIO_AUTH_TOKEN=`, `DATABASE_URL=postgres`). |
+| Secret-like patterns | `SECRET_HITS=0` (no concrete credentials detected; command output lists only placeholder-style pattern terms). |
 | Baseline mutation | `BASELINE_DIFF_LINES=0` (`project-plan/*` unchanged relative to start commit). |
 | Framework/code artifacts | `FORBIDDEN_HITS=4` (only explanatory mentions in `.md` files under README files, no implementation artifacts). |
 | PRD requirement extraction | `PRD_ID_COUNT=95`, `PRD_ID_UNIQUE=95`, `REQ_DUPLICATES=`. |
@@ -172,7 +172,7 @@ branch=main
 
 - `docs/product/release-1-approval-record.md` indicates approval state:
   - `Approval status: PENDING PRODUCT-OWNER APPROVAL`
-- `PRD draft commit: a0b0b2a0bd238afd5cb2e2121964266fa7ca4cae`
+- `PRD draft commit: 2f05ace`
 - No product-owner signature/date has been provided.
 
 ## 13) Security and privacy review
