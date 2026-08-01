@@ -31,16 +31,17 @@
 | Overage segment | Additional provider-billed segment beyond allowance that may incur cost. |
 | Provider-billed segment | SMS segment count reported by provider telemetry for chargeability. |
 | Spending limit | Per-location maximum amount enforceable for SMS overage charges. |
-| Established location | Location that completed two consecutive successfully settled billing cycles and has no unresolved failed/disputed invoice. |
+| Established location | A location with a paid initial software subscription, two consecutive successfully settled billing cycles on that same location, and no unresolved failed/disputed invoice. |
 | Dedicated messaging number | Single outbound/inbound message-capable phone number assigned to one active subscribed location. |
 | Consent | Explicit user agreement required for the requested communication action. |
 | Queue consent | Consent specific to queue operational messaging only. |
 | Marketing consent | Consent for commercial marketing; separate from queue consent. |
 | Identifiable customer data | Data that can identify an individual customer, including name, phone, and custom answers. |
-| Remote joining | A check-in pathway that allows customers to join using a non-codescan route, typically via a standard link. |
+| Remote joining | A check-in pathway that allows customers to join using a non-QR route, typically via a standard link. |
 | Advance joining | A check-in capability allowing customers to join before/after a queue is actively open according to configured operating-hours rules. |
 | QR join route | A check-in path where queue entry creation begins from a location QR scan entry point. |
-| Shareable join link | A reusable link that routes to a queue check-in entry point while not guaranteeing physical presence. |
+| Shareable join link | A reusable link that routes to a queue check-in entry point and may be copied or shared; it does not verify physical presence. |
+| Queue-SMS consent | Explicit queue-operational SMS consent that is separate from marketing consent and required before queue SMS messages are sent. |
 | Tenant | One organization and all resources that must be isolated from other organizations. |
 | Tenant isolation | Enforced separation of data and actions between organizations. |
 | Audit event | An immutable (or tamper-evident) record of a security, billing, or state action. |
