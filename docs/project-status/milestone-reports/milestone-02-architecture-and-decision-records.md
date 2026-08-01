@@ -177,7 +177,7 @@
 - Architecture specification commit: `95ba0ee`
 - Review record commit: `76af683`
 - Validation commit: `not separately committed`
-- Evidence / completion commit: `08a65b0`
+- Evidence / completion commit: `71a6fe4`
 
 ## 20) Validation status
 
