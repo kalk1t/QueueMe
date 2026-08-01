@@ -168,7 +168,7 @@ git status: clean
 
 - `docs/product/release-1-approval-record.md` indicates approval state:
   - `Approval status: PENDING PRODUCT-OWNER APPROVAL`
-- `PRD draft commit: 5184a79`
+- `PRD draft commit: e2820ab`
 - No product-owner signature/date has been provided.
 
 ## 13) Security and privacy review
@@ -230,5 +230,4 @@ git status: clean
 
 - No Android, web, backend, Terraform provider/resource, Docker, database, or integration code was added.
 - This milestone is documentation-only.
-
 
