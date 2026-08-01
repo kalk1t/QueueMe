@@ -19,8 +19,8 @@
 ## 3) Repository state at completion
 
 - Branch at completion: `main`
-- Working tree at completion: clean after draft commit
-- Commit at completion: `383b808`
+- Working tree at completion: currently dirty in this file only (line-ending normalization; no semantic content change)
+- Commit at completion: `5aff368`
 
 ## 4) Starting repository inventory
 
@@ -123,35 +123,31 @@ git diff --name-only -- project-plan/00_locked_product_baseline.md project-plan/
 Outputs:
 
 ```text
-PRD_ID_COUNT=95
-PRD_ID_UNIQUE=95
-REQ_DUPLICATES=
-BASELINE_MAP_ROWS=95
-OWNERSHIP_ROWS=95
+REQ_TOTAL=95
+REQ_UNIQUE=95
+REQ_DUPES=0
+TRACE_BASELINE_ROWS=95
+TRACE_OWNER_ROWS=95
+SPEC_NOT_IN_BASELINE_MAP=0
+BASELINE_NOT_IN_SPEC=0
 MISSING_ACCEPTANCE=0
 MISSING_MILESTONE=0
 MISSING_ACTOR=0
 MISSING_RISK=0
-MISSING_IN_BASELINE_MAP=
-UNMAPPED_BASELINE_IDS=
-MISSING_OWNER=
-PLACEHOLDER_HITS=0
+PLACEHOLDER_FILES_WITH_MARKERS=0
 SECRET_HITS=0
 BASELINE_DIFF_LINES=0
-FORBIDDEN_HITS=0
-git status: clean (no changes)
-PRD draft commit tracked in docs: 2f05ace
-Working commit: 383b808 docs: align milestone-1 report self-consistency
-branch=main
+FORBIDDEN_HITS=0 (non-markdown source scan)
+git status: one modified file (`docs/project-status/milestone-reports/milestone-01-product-specification-lock.md`) with no functional diff
 ```
 
 ## 10) Validation results
 
 | Check | Command result |
 | --- | --- |
-| Clean working tree scan | Clean (no uncommitted changes). |
+| Clean working tree scan | No functional diffs; file reports one modified path with only line-ending/metadata churn. |
 | Branch and remote checks | `main`; `origin` points to `https://github.com/kalk1t/QueueMe.git`. |
-| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `383b808`. |
+| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `5aff368`. |
 | Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and service-account files are ignored; tracked reference docs are not ignored. |
 | Secret-like patterns | `SECRET_HITS=0` (no concrete credentials detected; command output lists only placeholder-style pattern terms). |
 | Baseline mutation | `BASELINE_DIFF_LINES=0` (`project-plan/*` unchanged relative to start commit). |
@@ -225,7 +221,7 @@ branch=main
 | 13) No app/infrastructure implementation introduced | PASS |
 | 14) Locked baseline unchanged | PASS |
 | 15) Validation checks pass | PASS |
-| 16) Repository clean after commit | PASS |
+| 16) Repository clean after commit | BLOCKED — working tree currently has a non-functional line-ending-only modification in milestone report file. |
 | 17) Explicit product-owner approval | **BLOCKED — pending** |
 | 18) Completion report evidence completeness | PASS |
 | 19) Final completion status | **BLOCKED — pending explicit product-owner approval** |
@@ -234,8 +230,6 @@ branch=main
 
 - No Android, web, backend, Terraform provider/resource, Docker, database, or integration code was added.
 - This milestone is documentation-only.
-
-
 
 
 
