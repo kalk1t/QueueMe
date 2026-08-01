@@ -2,7 +2,7 @@
 
 - Milestone: Milestone 02 — Architecture and Decision Records
 - Review date: 2026-08-01
-- Repository commit (under review): (populate at final commit)
+- Repository commit (under review): `95ba0ee`
 - Reviewer role: Architecture reviewer + security reviewer
 - Architecture review result: `COMPLETE` for documentation coverage
 - Security review result: `BLOCKED` pending explicit threat-control evidence sign-off

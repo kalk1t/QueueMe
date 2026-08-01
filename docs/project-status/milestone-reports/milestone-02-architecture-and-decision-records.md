@@ -48,7 +48,7 @@
 - `docs/adr/0000-adr-template.md`
 - `docs/adr/0001-monorepo-topology-and-source-ownership.md`
 - `docs/adr/0002-modular-monolith-first-backend-architecture.md`
-- `docs/adr/0003-backend-as-sole-authoritative-state-owner.md`
+- `docs/adr/0003-backend-authority-for-queue-and-entitlement.md`
 - `docs/adr/0004-postgresql-authoritative-store.md`
 - `docs/adr/0005-redis-boundaries-and-non-authoritative-role.md`
 - `docs/adr/0006-rest-vs-websocket-responsibilities.md`
@@ -174,10 +174,10 @@
 ## 19) Commit lineage
 
 - Starting commit: `d1ed7e8c272ac2339c055a9dccf885c879e16ef5`
-- Architecture specification commit: `<docs commit for milestone 2 architecture>` (recorded at finalization)
-- Review record commit: `<docs review commit>`
-- Validation commit: `<validation/reference commit>`
-- Evidence/ completion commit: `<evidence commit>`
+- Architecture specification commit: `95ba0ee`
+- Review record commit: pending
+- Validation commit: `not separately committed`
+- Evidence / completion commit: pending
 
 ## 20) Validation status
 
