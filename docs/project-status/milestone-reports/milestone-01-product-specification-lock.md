@@ -20,7 +20,7 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after draft commit
-- Commit at completion: `2f05ace`
+- Commit at completion: `383b808`
 
 ## 4) Starting repository inventory
 
@@ -141,7 +141,7 @@ BASELINE_DIFF_LINES=0
 FORBIDDEN_HITS=4
 git status: clean (no changes)
 PRD draft commit tracked in docs: 2f05ace
-Working commit: 2f05ace docs: update milestone-1 validation evidence details
+Working commit: 383b808 docs: align milestone-1 report self-consistency
 branch=main
 ```
 
@@ -151,7 +151,7 @@ branch=main
 | --- | --- |
 | Clean working tree scan | Clean (no uncommitted changes). |
 | Branch and remote checks | `main`; `origin` points to `https://github.com/kalk1t/QueueMe.git`. |
-| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `2f05ace`. |
+| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `383b808`. |
 | Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and service-account files are ignored; tracked reference docs are not ignored. |
 | Secret-like patterns | `SECRET_HITS=0` (no concrete credentials detected; command output lists only placeholder-style pattern terms). |
 | Baseline mutation | `BASELINE_DIFF_LINES=0` (`project-plan/*` unchanged relative to start commit). |
