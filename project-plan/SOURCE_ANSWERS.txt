@@ -1,0 +1,231 @@
+
+A. Target market
+
+1. Which businesses should be targeted first?
+
+Barbershops, Hair and beauty salons
+
+2. Should the first release be US-only?
+
+because the pricing, SMS provider, currency, tax handling, consent language, and phone-number registration can initially be US-specific.
+
+3. Should medical clinics be explicitly excluded from the first release?
+
+Yes.
+
+4. Should restaurants be included initially?
+
+No, not initially.
+
+B. Business and location model
+
+5. Is the $39.99 subscription charged per location?
+
+Yes.
+
+6. Can one owner manage several locations from one account?
+
+Yes.
+
+7. Should additional locations receive a discount?
+
+Keep every location at $39.99.
+
+8. Should every newly paying business require your manual approval before activation?
+
+Yes. Server Administrator approval 
+
+9. How many staff accounts should one location include?
+
+unlimited operational staff for the first version, with role controls.
+
+C. Queue structure
+
+10. Should the first version support only one queue per location, or multiple queues?
+
+allow multiple queues
+
+11. Should customers choose a service when joining?
+
+optional and configurable by the business.
+
+12. Should one queue entry represent one person or a group/party?
+
+one person.
+
+13. Should appointments be completely excluded from the first version?
+
+yes.
+
+14. Can staff manually reorder customers?
+
+yes, but require an audit reason.
+
+15. Should businesses be able to create priority customers?
+
+not in the earliest release unless your first target industry requires it.
+
+16. What is the default no-show hold time?
+
+five minutes.
+
+17. Can a customer request additional time through the status page?
+
+Business-configured extension
+
+D. Customer check-in
+
+18. Which check-in methods must exist in the first release?
+
+QR code
+
+19. Is the customer’s phone number mandatory?
+
+Yes
+
+20. What customer information may the business request?
+
+Name or nickname
+Phone number
+Service
+
+Should businesses be allowed to create custom questions in the first release?
+Yes
+
+21. Can customers join remotely before physically arriving?
+
+Business-configurable
+
+22. Should the QR code work only during business hours?
+
+yes, unless the business explicitly enables advance joining.
+
+23. Should the business be able to limit maximum queue size?
+
+yes.
+
+E. SMS notifications
+
+24. Which notifications are enabled by default?
+
+Joined
+Almost ready
+Your turn
+Missed/no-show
+
+25. Should businesses be able to disable individual SMS events?
+
+yes.
+
+26. Should businesses be able to customize SMS text?
+
+yes, with character and segment limits.
+
+27. Should customers be able to reply to SMS messages?
+
+STOP, HELP, and one structured “I’m coming” reply only.
+
+28. Does each business receive its own sending number, or does the platform initially use shared managed senders?
+
+A dedicated business number provides cleaner branding but increases onboarding and cost. that will work fine.
+
+29. Should SMS messages support English only initially?
+
+English first, but store templates in a way that permits future languages.
+
+30. Is $0.03 charged per provider-billed segment?
+
+Yes, with a template preview explaining segment count.
+
+F. Pricing and billing
+
+31. Should $399.99 be the permanent annual price or only a founding-customer offer?
+
+Standard monthly: $39.99 
+Standard annual: $399.99
+
+32. Is the first billing period’s SMS allowance limited?
+
+each billing period must include 300sms
+
+
+33. After the first month, should every SMS be charged, or should each month contain an allowance?
+
+
+300 segments included monthly
+$0.03 per additional segment
+
+34. Should businesses prepay SMS credits or pay automatically in arrears?
+
+New/unverified businesses: controlled spending limit
+Established businesses: automatic monthly arrears
+
+35. What default SMS spending limit should apply?
+
+$50 per location per billing period.
+
+36. Should the business be allowed to increase the limit without your approval?
+
+no; i approve increases manually.
+
+37. Should there be a free software trial?
+
+fourteen-day operational trial with a strict SMS credit.
+
+G. Android distribution
+
+38. Should businesses purchase on the website and use the Android app only after subscription?
+
+Yes.
+
+39. Must the app be publicly available through Google Play from the first launch?
+
+closed pilot first, then public Play release.
+
+40. What is the oldest Android version you want to support?
+
+Android 12
+
+H. Connectivity and operations
+
+41. Should the first version require internet for all queue-changing operations?
+
+Yes.
+
+42. During an outage, should the app display the last cached queue as read-only?
+
+yes.
+
+43. Should several staff devices be able to operate the same queue simultaneously?
+
+yes. This requires real-time synchronization and transactional backend operations.
+
+44. Should one Android tablet be capable of becoming a customer kiosk?
+
+yes eventually
+
+45. Is a public TV/display screen required in the first release?
+
+unless initial pilot business specifically needs it.
+
+I. Privacy and customer data
+
+46. How long should completed customer records remain identifiable?
+
+Phone number and name: 30 days
+
+47. Can businesses export customer phone numbers?
+
+No by default. Queue consent should not automatically become marketing consent.
+
+48. Can businesses use queue customer numbers for future advertising?
+
+No. Marketing consent should be a completely separate future feature.
+
+49. Should customers be able to request immediate deletion from the status page?
+
+they can leave the queue immediately; formal deletion can follow the privacy workflow.
+
+50. Should staff see the complete phone number?
+
+Yes

@@ -1,0 +1,62 @@
+name: Feature request
+description: Propose an enhancement
+title: "Feature: "
+labels: ["enhancement"]
+projects: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Proposals should connect directly to the locked project plan and milestone scope.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Business problem
+      description: What business outcome is missing today?
+      placeholder: "Operators cannot quickly estimate wait time for walk-ins in multi-staff windows."
+    validations:
+      required: true
+  - type: input
+    id: user
+    attributes:
+      label: Target user
+      description: Persona and role
+      placeholder: "Salon owner, front desk staff, platform operator"
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Proposed outcome
+      description: Concrete success outcome and acceptance behavior
+      placeholder: "Staff can ... and customers see ..."
+    validations:
+      required: true
+  - type: input
+    id: plan_link
+    attributes:
+      label: Relationship to project plan
+      description: Add the milestone or ADR reference.
+      placeholder: "project-plan/21_queue_service_and_custom_question_configuration.md"
+    validations:
+      required: true
+  - type: dropdown
+    id: locked_behavior
+    attributes:
+      label: Changes locked product behavior
+      options:
+        - No
+        - Yes
+        - Unclear
+    validations:
+      required: true
+  - type: checkboxes
+    id: implications
+    attributes:
+      label: Compliance impact
+      description: Check all that apply
+      options:
+        - label: Privacy implications
+        - label: Billing implications
+        - label: Messaging implications
+        - label: Compliance implications

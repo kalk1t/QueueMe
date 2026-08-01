@@ -1,0 +1,90 @@
+name: Bug report
+description: Report a reproducible issue
+title: "Bug: "
+labels: ["bug"]
+projects: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Include only non-sensitive details.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, browser/device type, app version, and branch
+      placeholder: "iOS 17 / Android 14 / web Chrome 126"
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Application surface
+      description: Which interface is affected?
+      options:
+        - Android business app
+        - Customer check-in web
+        - Business owner web portal
+        - Platform admin portal
+    validations:
+      required: true
+  - type: input
+    id: context
+    attributes:
+      label: Location or queue context
+      description: Share location, queue, and tenant context only; do not include customer PII
+      placeholder: "Salon example - Downtown branch - Queue: Haircut"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Provide numbered steps
+      placeholder: |
+        1. Open ...
+        2. Trigger ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      validations:
+        required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      validations:
+        required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (secrets removed)
+      description: Include timestamps and correlation IDs if available. Remove credentials/PII.
+      placeholder: |
+        [2026-08-01T10:00:00Z] ... 
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Critical
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+  - type: dropdown
+    id: regression
+    attributes:
+      label: Regression status
+      description: Did this work before?
+      options:
+        - New since last change
+        - Regressed from previous behavior
+        - Existing / long-standing
+    validations:
+      required: true

@@ -1,0 +1,29 @@
+# Pull Request
+
+- [ ] Active milestone:
+- [ ] Summary:
+- [ ] Scope:
+- [ ] Files/components changed:
+  - 
+- [ ] Test commands and exact results:
+  - Command:
+  - Result:
+- [ ] Manual verification performed:
+  - Steps:
+  - Evidence:
+- [ ] Security and privacy impact:
+  - 
+- [ ] Billing impact:
+  - 
+- [ ] Tenant-isolation impact:
+  - 
+- [ ] Migration and rollback plan:
+  - 
+- [ ] Screenshots or evidence:
+  - 
+- [ ] Remaining blockers:
+  - 
+- [ ] Completion status:
+  - [ ] COMPLETE
+  - [ ] BLOCKED
+  - [ ] INCOMPLETE

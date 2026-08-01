@@ -1,0 +1,12 @@
+# Normalize text and manage CRLF/LF intentionally
+* text=auto
+
+# Web / app / infra source formats - enforce LF
+*.{md,markdown,txt,html,css,scss,sass,js,jsx,ts,tsx,json,yml,yaml,xml,java,kt,gradle,gradle.kts,hcl,tf,tfvars,sh,bash,sql,cs,cpp,c,h,hpp,proto,svg,ini,env,env.sample,lock} text eol=lf
+
+# Windows helpers
+*.{ps1,psm1,bat,cmd,powershell} text eol=crlf
+
+# Binary assets and archives
+*.{png,jpg,jpeg,gif,webp,bmp,tiff,ico,svgz,pdf,zip,tar,gz,7z,jar,war,aar,keystore,p12,pfx,jar,jks,pem,key,db,sqlite,sqlite3} binary
+
