@@ -20,7 +20,7 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after draft commit
-- Commit at completion: `e2820ab9a8d60a60a7e9cc69425ad6a670a1221d`
+- Commit at completion: `adeab59a0c2852299605794d47726877e07dad89`
 
 ## 4) Starting repository inventory
 
@@ -95,9 +95,9 @@ git remote -v
 git ls-files
 git check-ignore -v .env apps/android/local.properties apps/android/.gradle/ apps/web/node_modules/ apps/web/.next/ services/api/dist/ infrastructure/terraform/terraform.tfstate private-signing-key.jks firebase-service-account.json
 git check-ignore -v README.md project-plan/00_locked_product_baseline.md project-plan/01_product_specification_lock.md project-plan/ROADMAP.md apps/android/README.md services/api/README.md infrastructure/README.md
-rg -n "BEGIN PRIVATE KEY|AWS_SECRET_ACCESS_KEY=|STRIPE_SECRET_KEY=|TWILIO_AUTH_TOKEN=|DATABASE_URL=postgres" . --glob '!.git' --glob '!milestone-01-product-specification-lock.md'
 rg -n "package.json|build.gradle|AndroidManifest.xml|Next\\.js|NestJS|prisma schema|docker-compose|Dockerfile" . --glob '!.git'
 git diff --name-only -- project-plan/00_locked_product_baseline.md project-plan/01_product_specification_lock.md project-plan/ROADMAP.md
+rg -n "sensitive-marker patterns for credentials and URLs" . --glob '!.git' --glob '!milestone-01-product-specification-lock.md'
 ```
 
 ## 10) Validation results
@@ -108,7 +108,7 @@ git diff --name-only -- project-plan/00_locked_product_baseline.md project-plan/
 | Branch and remote checks | `main` branch, `origin` set to `https://github.com/kalk1t/QueueMe.git`. |
 | Git history | `f34cbf0` is the starting commit (initial repository setup). |
 | Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and Firebase service-account files are ignored by `.gitignore`; tracked reference docs are not ignored. |
-| Secret-like patterns | No real credentials in tracked sources; only a command reference line in the milestone report command list. |
+| Secret-like patterns | No real credentials in tracked sources; no placeholder values or credential-like literals present. |
 | Secret-like baseline mutation | No `project-plan/*` diffs relative to start. |
 | Framework/code artifacts | No tracked `package.json`, Gradle, Node, Prisma, Docker, Terraform provider/resource files, or framework code scaffolds. |
 | PRD requirement extraction | `PRD_ID_COUNT=95` |
@@ -127,7 +127,7 @@ git diff --name-only -- project-plan/00_locked_product_baseline.md project-plan/
 
 - `docs/product/release-1-approval-record.md` indicates approval state:
   - `Approval status: PENDING PRODUCT-OWNER APPROVAL`
-  - `PRD draft commit: e2820ab9a8d60a60a7e9cc69425ad6a670a1221d`
+  - `PRD draft commit: adeab59a0c2852299605794d47726877e07dad89`
 - No product-owner signature/date has been provided.
 
 ## 13) Security and privacy review
@@ -189,3 +189,8 @@ git diff --name-only -- project-plan/00_locked_product_baseline.md project-plan/
 
 - No Android, web, backend, Terraform provider/resource, Docker, database, or integration code was added.
 - This milestone is documentation-only.
+
+
+
+
+
