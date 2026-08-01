@@ -20,7 +20,7 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after latest normalization and metadata update commit
-- Commit at completion: `722dc38`
+- Commit at completion: `6a71efe`
 
 ## 4) Starting repository inventory
 
@@ -169,7 +169,7 @@ git status: clean
 
 - `docs/product/release-1-approval-record.md` indicates approval state:
   - `Approval status: PENDING PRODUCT-OWNER APPROVAL`
-- `PRD draft commit: e2820ab`
+- `PRD draft commit: 6a71efe`
 - No product-owner signature/date has been provided.
 
 ## 13) Security and privacy review
