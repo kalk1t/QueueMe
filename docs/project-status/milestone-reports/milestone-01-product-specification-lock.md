@@ -20,7 +20,7 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after draft commit
-- Commit at completion: `8378bc924b390fe8eada082fc0c4a6b9332e4860`
+- Commit at completion: `a0b0b2a0bd238afd5cb2e2121964266fa7ca4cae`
 
 ## 4) Starting repository inventory
 
@@ -127,7 +127,7 @@ rg -n "sensitive-marker patterns for credentials and URLs" . --glob '!.git' --gl
 
 - `docs/product/release-1-approval-record.md` indicates approval state:
   - `Approval status: PENDING PRODUCT-OWNER APPROVAL`
-- `PRD draft commit: 8378bc924b390fe8eada082fc0c4a6b9332e4860`
+- `PRD draft commit: a0b0b2a0bd238afd5cb2e2121964266fa7ca4cae`
 - No product-owner signature/date has been provided.
 
 ## 13) Security and privacy review
