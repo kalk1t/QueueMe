@@ -20,7 +20,7 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after latest normalization and metadata update commit
-- Commit at completion: `3dcd2c065a096cff5606b6173231a58675c3631a`
+- Commit at completion: `643013606a6e4516871253fc6264b440498ca067`
 
 ## 4) Starting repository inventory
 
@@ -147,7 +147,7 @@ git status: clean
 | --- | --- |
 | Clean working tree scan | PASS |
 | Branch and remote checks | `main`; `origin` points to `https://github.com/kalk1t/QueueMe.git`. |
-| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `HEAD`. |
+| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `643013606a6e4516871253fc6264b440498ca067`. |
 | Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and service-account files are ignored; tracked reference docs are not ignored. |
 | Secret-like patterns | `SECRET_HITS=0` (no concrete credentials detected; command output lists only placeholder-style pattern terms). |
 | Baseline mutation | `BASELINE_DIFF_LINES=0` (`project-plan/*` unchanged relative to start commit). |
