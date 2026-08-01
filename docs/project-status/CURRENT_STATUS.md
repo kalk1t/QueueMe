@@ -4,7 +4,7 @@
 - Release: Business-Ready Version 1
 - Current phase: Phase I — Product and Engineering Foundation
 - Active milestone: Milestone 01 — Product Specification Lock
-- Milestone 01 status: Pending product-owner approval
+- Milestone 01 status: BLOCKED — pending explicit product-owner approval
 - Application code: Not initialized
 - Infrastructure: Not provisioned
 - Production environment: Not created

@@ -3,7 +3,7 @@
 ## 1) Milestone result
 
 - Milestone: Milestone 01 - Product Specification Lock
-- Final status: **BLOCKED - pending explicit product-owner approval**
+- Final status: **BLOCKED — pending explicit product-owner approval**
 - Start timestamp: 2026-08-01
 - Completion timestamp: 2026-08-01 (validation and report finalization completed)
 
@@ -20,7 +20,7 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after latest normalization and metadata update commit
-- Commit at completion: `6a71efe`
+- Commit at completion: `a3daef9`
 
 ## 4) Starting repository inventory
 
@@ -53,11 +53,11 @@
 
 ## 7) Requirement summary
 
-- Total normative requirements: **95**
+- Total normative requirements: **94**
 - Requirement count by category (from `PRD-*` identifiers in the PRD):
   - `AUDIT`: 2
   - `CHECKIN`: 9
-  - `CUSTOM`: 6
+  - `CUSTOM`: 5
   - `LOC`: 1
   - `MKT`: 10
   - `NOSHOW`: 2
@@ -75,11 +75,11 @@
 
 ## 8) Traceability coverage
 
-- Baseline-to-PRD mapping rows: 95
-- Ownership rows: 95
+- Baseline-to-PRD mapping rows: 94
+- Ownership rows: 94
 - Unmapped PRD IDs in baseline map: none
 - PRD IDs missing from ownership map: none
-- Ownership map coverage: all 95 IDs mapped
+- Ownership map coverage: all 94 IDs mapped
 - No PRD ID appears without a verification milestone
 
 ## 9) Validation commands
@@ -123,11 +123,11 @@ git diff --name-only -- project-plan/00_locked_product_baseline.md project-plan/
 Outputs:
 
 ```text
-REQ_TOTAL=95
-REQ_UNIQUE=95
+REQ_TOTAL=94
+REQ_UNIQUE=94
 REQ_DUPES=0
-TRACE_BASELINE_ROWS=95
-TRACE_OWNER_ROWS=95
+TRACE_BASELINE_ROWS=94
+TRACE_OWNER_ROWS=94
 SPEC_NOT_IN_BASELINE_MAP=0
 BASELINE_NOT_IN_SPEC=0
 PRD_MISSING_ACCEPTANCE=0
@@ -148,13 +148,13 @@ git status: clean
 | --- | --- |
 | Clean working tree scan | PASS |
 | Branch and remote checks | `main`; `origin` points to `https://github.com/kalk1t/QueueMe.git`. |
-| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `722dc38`. |
+| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `ba9076d` (includes `a3daef9`). |
 | Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and service-account files are ignored; tracked reference docs are not ignored. |
 | Secret-like patterns | `SECRET_HITS=0` (no concrete credentials detected; command output lists only placeholder-style pattern terms). |
 | Baseline mutation | `BASELINE_DIFF_LINES=0` (`project-plan/*` unchanged relative to start commit). |
 | Framework/code artifacts | `FORBIDDEN_HITS=0` in non-markdown file scan (no application/framework artifacts introduced). |
-| PRD requirement extraction | `REQ_TOTAL=95`, `REQ_UNIQUE=95`, `REQ_DUPES=0`. |
-| Traceability mapping parse | `BASELINE_MAP_ROWS=95`, `OWNERSHIP_ROWS=95`, `SPEC_NOT_IN_BASELINE_MAP=0`, `OWNER_MISSING=0`. |
+| PRD requirement extraction | `REQ_TOTAL=94`, `REQ_UNIQUE=94`, `REQ_DUPES=0`. |
+| Traceability mapping parse | `BASELINE_MAP_ROWS=94`, `OWNERSHIP_ROWS=94`, `SPEC_NOT_IN_BASELINE_MAP=0`, `OWNER_MISSING=0`. |
 | Acceptance-condition coverage | `MISSING_ACCEPTANCE=0`, `MISSING_MILESTONE=0`, `MISSING_ACTOR=0`, `MISSING_RISK=0`. |
 | Milestone scope | Only documentation and planning deliverables changed. |
 
@@ -169,7 +169,7 @@ git status: clean
 
 - `docs/product/release-1-approval-record.md` indicates approval state:
   - `Approval status: PENDING PRODUCT-OWNER APPROVAL`
-- `PRD draft commit: 6a71efe`
+- `PRD draft commit: a3daef9`
 - No product-owner signature/date has been provided.
 
 ## 13) Security and privacy review

@@ -3,7 +3,7 @@
 ## Scope
 
 Date: 2026-08-01  
-Status: Draft milestone-1 draft (pending product-owner approval)
+Status: Draft milestone-1 corrections (pending product-owner approval)
 
 ## Checklist
 
@@ -15,11 +15,18 @@ Status: Draft milestone-1 draft (pending product-owner approval)
 | Every normative requirement has an acceptance condition | PASS | Section 39 rows in `release-1-specification.md` include explicit acceptance conditions for each requirement. |
 | Every normative requirement has a future milestone owner | PASS | `requirements-traceability.md` ownership map includes all IDs with milestones. |
 | No unresolved placeholders remain | PASS | Scan result shows no unresolved placeholder markers in this milestone’s normative artifacts. |
+| No contradictory lifecycle transitions | PASS | Trial and queue-entry tables enforce explicit transition restrictions and no implicit jump states. |
+| No unapproved automatic no-show transition | PASS | `PRD-NOSHOW-001` and Queue-entry lifecycle require manual staff confirmation from `CALLED` only. |
+| No duplicate retention authority | PASS | 30-day retention is owned by `PRD-PRIV-001` only. |
+| Explicit queue-SMS consent behavior | PASS | Section 25 and `PRD-PRIV-003` require phone/location/queue-entry/timestamp/version/method capture before SMS. |
+| Location-scoped establishment | PASS | `PRD-SUB-018` and section 13.3 define establishment on current location only with no cross-location transfer. |
+| Testable remote-join behavior | PASS | `PRD-CHECKIN-006/007` require shareable-link enabled path and advance-join policy tests by scope and open-hours. |
+| No malformed Markdown tables | PASS | Table row delimiters in `requirements-traceability.md` and `release-1-specification.md` reviewed for `|` boundaries at start/end. |
 | Prices are consistent | PASS | 39.99 monthly and 399.99 annual requirements align across PRD and traceability. |
 | SMS allowances are consistent | PASS | Trial 100 + monthly cycle 300 + no rollover + overage policy documented consistently. |
 | Trial behavior is consistent | PASS | Trial lifecycle and transition state tables reflect all trial constraints from baseline. |
 | Annual and monthly billing behavior is consistent | PASS | Separate rules for monthly/annual in Sections 13 and 14 and corresponding requirement rows. |
-| Retention periods are consistent | PASS | 30-day retention appears in PRD-CUSTOM-006 and PRD-PRIV-001 and linked in traceability. |
+| Retention periods are consistent | PASS | 30-day retention appears in PRD-PRIV-001 and linked in traceability. |
 | Excluded industries are consistent | PASS | Explicit exclusions section includes clinic, restaurant, appointment, and marketing exclusions. |
 | Android minimum version is consistent | PASS | PRD-PLAT-002 with 12 minimum and mapping to Milestone 27. |
 | Check-in rules are consistent | PASS | Section 19 and Section 20 plus PRD-CHECKIN-* rows cover mandatory fields and optional features. |
