@@ -165,7 +165,7 @@ git status: clean
 
 - Search expression: `\b(TODO|FIXME|TBD|PLACEHOLDER)\b`
 - NORMATIVE_PLACEHOLDER_HITS=0
-- SUPPORTING_REFERENCE_HITS=0
+- SUPPORTING_REFERENCE_HITS=4
 - UNRESOLVED_PLACEHOLDER_HITS=0
 - Matching files:
   - `docs/project-status/milestone-reports/milestone-01-product-specification-lock.md` (`NORMATIVE_PLACEHOLDER_HITS=0`, `SUPPORTING_REFERENCE_HITS=4`)
