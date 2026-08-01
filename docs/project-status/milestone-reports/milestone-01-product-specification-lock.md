@@ -137,7 +137,7 @@ PRD_MISSING_MILESTONE=0
 PRD_MISSING_ACTOR=0
 PRD_MISSING_RISK=0
 NORMATIVE_PLACEHOLDER_HITS=0
-SUPPORTING_REFERENCE_HITS=4
+SUPPORTING_REFERENCE_HITS=1
 UNRESOLVED_PLACEHOLDER_HITS=0
 BASELINE_DIFF_COUNT=0
 SECRET_HITS=0
@@ -165,10 +165,10 @@ git status: clean
 
 - Search expression: `\b(TODO|FIXME|TBD|PLACEHOLDER)\b`
 - NORMATIVE_PLACEHOLDER_HITS=0
-- SUPPORTING_REFERENCE_HITS=4
+- SUPPORTING_REFERENCE_HITS=1
 - UNRESOLVED_PLACEHOLDER_HITS=0
 - Matching files:
-  - `docs/project-status/milestone-reports/milestone-01-product-specification-lock.md` (`NORMATIVE_PLACEHOLDER_HITS=0`, `SUPPORTING_REFERENCE_HITS=4`)
+  - `docs/project-status/milestone-reports/milestone-01-product-specification-lock.md` (`NORMATIVE_PLACEHOLDER_HITS=0`, `SUPPORTING_REFERENCE_HITS=1`)
 - All SUPPORTING_REFERENCE_HITS entries are explanatory search-artifact references and not unresolved placeholders.
 
 ## 11) Manual review
