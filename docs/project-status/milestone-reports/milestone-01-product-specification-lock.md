@@ -20,7 +20,7 @@
 
 - Branch at completion: `main`
 - Working tree at completion: clean after draft commit
-- Commit at completion: `93812c33db53af9d8c5ef9f4ecf2d3bbf2e1e8d4` (current milestone draft commit)
+- Commit at completion: `93812c33db53af9d8c5ef9f4ecf2d3bbf2e1e8d4`
 
 ## 4) Starting repository inventory
 
