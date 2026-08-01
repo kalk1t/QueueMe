@@ -14,14 +14,14 @@ Status: Approved milestone-1 completion
 | Every normative requirement has a unique ID | PASS | IDs validated with a repository script in milestone report command log. |
 | Every normative requirement has an acceptance condition | PASS | Section 39 rows in `release-1-specification.md` include explicit acceptance conditions for each requirement. |
 | Every normative requirement has a future milestone owner | PASS | `requirements-traceability.md` ownership map includes all IDs with milestones. |
-| No unresolved placeholders remain | PASS | Scan result shows no unresolved placeholder markers in this milestone's normative artifacts. |
+| No unresolved action markers remain | PASS | Scan result shows no unresolved action markers in this milestone's normative artifacts. |
 | No contradictory lifecycle transitions | PASS | Trial and queue-entry tables enforce explicit transition restrictions and no implicit jump states. |
 | No unapproved automatic no-show transition | PASS | `PRD-NOSHOW-001` and Queue-entry lifecycle require manual staff confirmation from `CALLED` only. |
 | Trial cancellation does not create indefinite free operation | PASS | Cancellation disables conversion but keeps access only to `trial_end`; paid SMS overages are blocked during cancellation. |
 | No duplicate retention authority | PASS | 30-day retention is owned by `PRD-PRIV-001` only. |
 | Explicit queue-SMS consent behavior | PASS | Section 25 and `PRD-PRIV-003` require phone/location/queue-entry/timestamp/version/method capture before SMS. |
 | Location-scoped establishment | PASS | `PRD-SUB-018` and section 13.3 define establishment on current location only with no cross-location transfer. |
-| Placeholder reconciliation (normative/supporting) | PASS | No normative placeholders remain and no unresolved placeholder hits were found. |
+| Marker reconciliation (normative/supporting) | PASS | No normative action-markers remain and no unresolved marker hits were found. |
 | Testable remote-join behavior | PASS | `PRD-CHECKIN-006/007` require shareable-link enabled path and advance-join policy tests by scope and open-hours. |
 | No malformed Markdown tables | PASS | Table row delimiters in `requirements-traceability.md` and `release-1-specification.md` reviewed for `|` boundaries at start/end. |
 | Prices are consistent | PASS | 39.99 monthly and 399.99 annual requirements align across PRD and traceability. |

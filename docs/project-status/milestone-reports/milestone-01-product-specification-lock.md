@@ -30,8 +30,8 @@
 - Final pre-approval semantic pass: `6d7224a5ca869b257e09da044d271cfc8edf6807`
 - Pre-approval evidence HEAD: `915630bb763a2cd549a5a2e7672e6bad8abeb80d`
 - Approved final specification commit: `76ef4bc874284ff446529a296efb56d6edf10b24`
-- Approval commit: `<PENDING_APPROVAL_COMMIT>`
-- Final evidence commit: `<HEAD_AT_EVIDENCE>` (to be replaced with final repository HEAD)
+- Approval commit: `6a68c7631c73173a5559fec3ce7e4039174c0920`
+- Final evidence commit: repository `HEAD` (this evidence commit; hash in completion response)
 
 ## 4) Starting repository inventory
 
@@ -162,7 +162,7 @@ git status: clean
 | --- | --- |
 | Clean working tree scan | PASS |
 | Branch and remote checks | `main`; `origin` points to `https://github.com/kalk1t/QueueMe.git`. |
-| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`; prior reviewed draft `5608ec7c5e29d9da3fc8c1cda57e5fcb8666ee41`; earlier semantic correction `a3daef929ae3a0032addd5d590ecda2368d326e7`; pre-approval semantic pass `6d7224a5ca869b257e09da044d271cfc8edf6807`; approved final specification commit `76ef4bc874284ff446529a296efb56d6edf10b24`; approval commit `<PENDING_APPROVAL_COMMIT>`; pre-approval evidence HEAD `915630bb763a2cd549a5a2e7672e6bad8abeb80d`. |
+| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`; prior reviewed draft `5608ec7c5e29d9da3fc8c1cda57e5fcb8666ee41`; earlier semantic correction `a3daef929ae3a0032addd5d590ecda2368d326e7`; pre-approval semantic pass `6d7224a5ca869b257e09da044d271cfc8edf6807`; approved final specification commit `76ef4bc874284ff446529a296efb56d6edf10b24`; approval commit `6a68c7631c73173a5559fec3ce7e4039174c0920`; pre-approval evidence HEAD `915630bb763a2cd549a5a2e7672e6bad8abeb80d`; final evidence commit is repository `HEAD` at commit-time. |
 | Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and service-account files are ignored; tracked reference docs are not ignored. |
 | Secret-like patterns | `SECRET_HITS=0` (no concrete credentials detected; command output lists only placeholder-style pattern terms). |
 | Baseline mutation | `BASELINE_DIFF_COUNT=0` (`project-plan/*` unchanged relative to start commit). |
