@@ -23,6 +23,8 @@
 | No-show | Queue state indicating customer did not appear within allowed no-show window. |
 | Called hold | The configured interval that starts when an entry enters `CALLED` and ends when hold-based no-show confirmation becomes required. |
 | No-show confirmation | The explicit staff action that transitions an entry from `CALLED` to `NO_SHOW` after the called hold expiry. |
+| TRIAL_REQUEST_CANCELLED | A terminal pre-activation trial onboarding result where the trial never became operational and no allowance was activated. |
+| TRIAL_CANCEL_SCHEDULED | A terminal trial-cancellation state entered after activation that keeps non-converted trial operations active until scheduled `trial_end`. |
 | Customer extension | A temporary hold allowing a customer more time to arrive/return. |
 | Trial | Temporary subscription state lasting 14 days with reduced SMS entitlement. |
 | Billing cycle | Calendar period used to compute location software charges for recurring subscription. |

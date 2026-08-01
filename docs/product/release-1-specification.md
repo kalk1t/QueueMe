@@ -49,7 +49,7 @@ Release 1 launch is US-first and is targeted to:
 
 Release 1 includes queue operations, queue-entry lifecycle management, messaging, billing control, and operational surfaces required by this specification.
 
-Release 1 excludes non-specified verticals, distribution channels, and feature categories described in Section 38.
+Release 1 excludes non-specified verticals, distribution channels, and feature categories described in Section 38 (Explicit exclusions).
 
 ## 7. Actors
 
@@ -117,10 +117,12 @@ An active location entitlement unlocks messaging and operational capabilities fo
 | CREATED | Location record exists but is not yet operational | -> AWAITING_SUBSCRIPTION_OR_TRIAL |
 | AWAITING_SUBSCRIPTION_OR_TRIAL | Location is onboarding and not yet entitled | -> TRIAL_REQUESTED, -> PENDING_ADMIN_APPROVAL |
 | TRIAL_REQUESTED | Trial request has been submitted and is being prepared | -> PENDING_ADMIN_APPROVAL |
-| PENDING_ADMIN_APPROVAL | Single approval gate for all entitlement paths; payment context is captured | -> TRIAL_ACTIVE, -> PAID_ACTIVE |
+| PENDING_ADMIN_APPROVAL | Single approval gate for all entitlement paths; payment context is captured | -> TRIAL_ACTIVE, -> PAID_ACTIVE, -> TRIAL_REQUEST_CANCELLED (trial request), -> ONBOARDING_REQUEST_CANCELLED (direct-paid request) |
 | TRIAL_ACTIVE | Trial entitlement is active and the 14-day trial clock starts here | -> TRIAL_SMS_PAUSED, -> TRIAL_CANCEL_SCHEDULED, -> MONTHLY_ACTIVE |
 | TRIAL_SMS_PAUSED | Trial remains active while SMS sending is paused after allowance exhaustion | -> TRIAL_CANCEL_SCHEDULED, -> MONTHLY_ACTIVE |
-| TRIAL_CANCEL_SCHEDULED | Cancellation requested; auto-conversion is disabled | -> TRIAL_ENDED |
+| TRIAL_CANCEL_SCHEDULED | Post-activation cancellation request with auto-conversion disabled | -> TRIAL_ENDED |
+| TRIAL_REQUEST_CANCELLED | Trial request cancelled or rejected before activation | terminal |
+| ONBOARDING_REQUEST_CANCELLED | Direct paid onboarding request cancelled or rejected before activation | terminal |
 | TRIAL_ENDED | Trial entitlement is no longer active after trial end or scheduled cancellation | terminal |
 | MONTHLY_ACTIVE | Trial reached end without effective cancellation and converted to monthly software entitlement | terminal for trial flow |
 | PAID_ACTIVE | Location has active paid entitlement | (billing lifecycle is defined in Section 13) |
@@ -148,10 +150,12 @@ Trial behavior applies per location when business onboarding enters trial state.
 | State | Meaning | Transition rule | Notes |
 | --- | --- | --- | --- |
 | TRIAL_REQUESTED | Trial request is submitted and waiting for admin review | -> PENDING_ADMIN_APPROVAL | Timer does not start in this state |
-| PENDING_ADMIN_APPROVAL | Payment method and request are captured and waiting for admin decision | -> TRIAL_ACTIVE on approved trial path; -> PAID_ACTIVE on approved paid path; -> TRIAL_CANCEL_SCHEDULED when explicitly rejected or canceled | Admin approval is required before the trial clock starts |
+| PENDING_ADMIN_APPROVAL | Payment method and request are captured and waiting for admin decision | -> TRIAL_ACTIVE on approved trial path; -> PAID_ACTIVE on approved paid path; -> TRIAL_REQUEST_CANCELLED when a trial request is explicitly rejected or canceled before activation; -> ONBOARDING_REQUEST_CANCELLED when a paid request is explicitly rejected or canceled before activation | Admin approval is required before the trial clock starts |
 | TRIAL_ACTIVE | Trial is active; SMS allowances are being consumed | -> TRIAL_SMS_PAUSED when 100 provider-billed trial segments are consumed; -> MONTHLY_ACTIVE when 14-day trial ends and not canceled; -> TRIAL_CANCEL_SCHEDULED when canceled | Trial length is exactly 14 days |
 | TRIAL_SMS_PAUSED | Trial remains active; SMS sending is paused after allowance exhaustion | -> MONTHLY_ACTIVE when 14-day trial ends and not canceled; -> TRIAL_CANCEL_SCHEDULED when canceled | Queue and browser status remain available |
-| TRIAL_CANCEL_SCHEDULED | Cancellation requested and accepted; conversion is disabled | -> TRIAL_ENDED at scheduled `trial_end` | Remaining trial entitlement persists until scheduled end |
+| TRIAL_CANCEL_SCHEDULED | Cancellation requested and accepted after activation; conversion is disabled | -> TRIAL_ENDED at scheduled `trial_end` | Remaining trial entitlement persists until scheduled end |
+| TRIAL_REQUEST_CANCELLED | Trial request was rejected before activation | terminal | No `trial_start`, no `trial_end`, and no trial SMS allowance were activated |
+| ONBOARDING_REQUEST_CANCELLED | Direct paid request was rejected before activation | terminal | No trial entitlement is activated |
 | TRIAL_ENDED | Trial entitlement no longer exists; further entitlement requires paid subscription | terminal |
 | MONTHLY_ACTIVE | Trial reached end without active cancellation and converted to monthly software entitlement | terminal conversion outcome |
 
@@ -159,15 +163,17 @@ Trial behavior applies per location when business onboarding enters trial state.
 
 | State before cancellation | State after cancellation | Requirement |
 | --- | --- | --- |
-| TRIAL_REQUESTED | TRIAL_CANCEL_SCHEDULED | Trial request has been captured but not started; access is never activated. |
-| PENDING_ADMIN_APPROVAL | TRIAL_CANCEL_SCHEDULED | Pending trial requests remain non-operational and cannot start without approval. |
+| TRIAL_REQUESTED | TRIAL_REQUEST_CANCELLED | Trial request has been captured but not started; access is never activated. |
+| PENDING_ADMIN_APPROVAL | TRIAL_REQUEST_CANCELLED | Pending trial requests remain non-operational and cannot start without approval. |
+| PENDING_ADMIN_APPROVAL | ONBOARDING_REQUEST_CANCELLED | Paid request was rejected or canceled before approval; no operational entitlement is activated. |
 | TRIAL_ACTIVE | TRIAL_CANCEL_SCHEDULED | Trial operations remain, but auto-conversion is disabled. |
 | TRIAL_SMS_PAUSED | TRIAL_CANCEL_SCHEDULED | Trial operations remain, SMS is still paused. |
 
 Cancellation policy:
 
 - Record the exact cancellation request time.
-- Compute and retain the original `trial_end` from the same trial request context.
+- For pre-activation cancellation (`TRIAL_REQUEST_CANCELLED`), no `trial_start`, no `trial_end`, and no trial SMS allowance is activated.
+- For post-activation cancellation, the trial has a valid `trial_start` and original `trial_end`.
 - Keep current trial access and operations until `trial_end`.
 - Allow remaining unused trial SMS allowance to be consumed until either 100 provider-billed segments are reached or `trial_end`.
 - Do not generate paid SMS overages during cancellation.
@@ -182,13 +188,14 @@ Cancellation policy:
 - Administrator approval must occur before the trial clock starts.
 - At 100 provider-billed segments, SMS sending pauses.
 - There is no allowance reset during a single trial period.
-- Canceling a trial does not immediately terminate the remaining trial period.
+- Canceling a trial after activation does not immediately terminate the remaining trial period.
 - A canceled trial keeps operations until `trial_end`, then stops unless paid.
 - Queue operations, customer check-in, and browser status continue while SMS is paused.
 - Trial SMS exhaustion does not stop queue functionality or status checks.
 - Annual billing begins only after an explicit annual-plan selection (monthly remains the default at trial conversion).
 - Uncanceled trials convert to monthly software subscription via `MONTHLY_ACTIVE`.
 - Canceled trials do not auto-convert and do not create indefinite free operational access.
+- Direct paid requests canceled or rejected before approval remain non-operational via `ONBOARDING_REQUEST_CANCELLED`.
 
 ## 13. Paid subscription lifecycle
 
