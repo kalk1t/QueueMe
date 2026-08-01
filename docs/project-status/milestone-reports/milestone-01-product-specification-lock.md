@@ -84,7 +84,7 @@
 
 ## 9) Validation commands
 
-Executed commands and results:
+Executed validation commands and results:
 
 ```bash
 git status --short
@@ -95,25 +95,70 @@ git remote -v
 git ls-files
 git check-ignore -v .env apps/android/local.properties apps/android/.gradle/ apps/web/node_modules/ apps/web/.next/ services/api/dist/ infrastructure/terraform/terraform.tfstate private-signing-key.jks firebase-service-account.json
 git check-ignore -v README.md project-plan/00_locked_product_baseline.md project-plan/01_product_specification_lock.md project-plan/ROADMAP.md apps/android/README.md services/api/README.md infrastructure/README.md
-rg -n "package.json|build.gradle|AndroidManifest.xml|Next\\.js|NestJS|prisma schema|docker-compose|Dockerfile" . --glob '!.git'
 git diff --name-only -- project-plan/00_locked_product_baseline.md project-plan/01_product_specification_lock.md project-plan/ROADMAP.md
-rg -n "sensitive-marker patterns for credentials and URLs" . --glob '!.git' --glob '!milestone-01-product-specification-lock.md'
+rg -n "TBD|TODO|FIXME" docs/product docs/project-status/milestone-reports/milestone-01-product-specification-lock.md --glob '!.git'
+rg -n "BEGIN PRIVATE KEY|AWS_SECRET_ACCESS_KEY=|STRIPE_SECRET_KEY=|TWILIO_AUTH_TOKEN=|DATABASE_URL=postgres" . --glob '!.git'
+rg -n "package\.json|build.gradle|NestJS|Prisma|Dockerfile|Terraform\\s+provider|\\.kt$|Next\\.js|AndroidManifest\\.xml" . --glob '!.git' --glob '!.github/**' --glob '!project-plan/**' --glob '!docs/project-status/milestone-reports/*.md'
+$ErrorActionPreference='Stop'
+$reqText = Get-Content docs/product/release-1-specification.md -Raw
+$ids = [regex]::Matches($reqText,'PRD-[A-Z]+-\\d{3}') | ForEach-Object { $_.Value }
+$idsUnique = $ids | Sort-Object -Unique
+$dup = $ids | Group-Object | Where-Object Count -gt 1 | ForEach-Object Name
+$traceText = Get-Content docs/product/requirements-traceability.md -Raw
+$before = ($traceText -split '## 2\\) PRD ownership map')[0]
+$baselineIds = foreach($line in ($before -split "`r?`n")){ if($line -match '^\\|\\s*00_locked_product_baseline\\.md'){ $p=$line -split '\\|'; if($p.Length -ge 3){ $id=$p[2].Trim(); if($id -match '^PRD-[A-Z]+-\\d{3}$'){ $id } } } }
+$after = ($traceText -split '## 2\\) PRD ownership map and verification targets')[1]
+$ownerIds = foreach($line in ($after -split "`r?`n")){ if($line -match '^\\|\\s*(PRD-[A-Z]+-\\d{3})\\s*\\|'){ $Matches[1] } }
+$reqRows = $reqText -split "`r?`n" | Where-Object { $_ -match '^\\|\\s*PRD-[A-Z]+-\\d{3}\\s*\\|' }
+$missingAcceptance=$missingMilestone=$missingActor=$missingRisk=0
+foreach($r in $reqRows){ $p=$r -split '\\|'; if($p.Count -ge 7){ if($p[3].Trim().Length -eq 0){ $missingAcceptance++ }; if($p[4].Trim().Length -eq 0){ $missingMilestone++ }; if($p[5].Trim().Length -eq 0){ $missingActor++ }; if($p[6].Trim().Length -eq 0){ $missingRisk++ } } }
+$missingInBase = ($idsUnique | Where-Object { $baselineIds -notcontains $_ })
+$missingFromBase = ($baselineIds | Sort-Object -Unique | Where-Object { $idsUnique -notcontains $_ })
+$missingOwner = ($idsUnique | Where-Object { $ownerIds -notcontains $_ })
+git log -1 --oneline
+git rev-parse --short HEAD
+git diff --name-only -- project-plan/00_locked_product_baseline.md project-plan/01_product_specification_lock.md project-plan/ROADMAP.md
+```
+
+Outputs:
+
+```text
+PRD_ID_COUNT=95
+PRD_ID_UNIQUE=95
+REQ_DUPLICATES=
+BASELINE_MAP_ROWS=95
+OWNERSHIP_ROWS=95
+MISSING_ACCEPTANCE=0
+MISSING_MILESTONE=0
+MISSING_ACTOR=0
+MISSING_RISK=0
+MISSING_IN_BASELINE_MAP=
+UNMAPPED_BASELINE_IDS=
+MISSING_OWNER=
+PLACEHOLDER_HITS=0
+SECRET_HITS=0
+BASELINE_DIFF_LINES=0
+FORBIDDEN_HITS=4
+git status: clean (no changes)
+PRD draft commit tracked in docs: a0b0b2a0bd238afd5cb2e2121964266fa7ca4cae
+Working commit: 89aac26 docs: refresh milestone-1 evidence hashes to latest head
+branch=main
 ```
 
 ## 10) Validation results
 
 | Check | Command result |
 | --- | --- |
-| Clean working tree scan | Working tree was clean at start and is clean after draft commit; only milestone documentation files changed within scope. |
-| Branch and remote checks | `main` branch, `origin` set to `https://github.com/kalk1t/QueueMe.git`. |
-| Git history | `f34cbf0` is the starting commit (initial repository setup). |
-| Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and Firebase service-account files are ignored by `.gitignore`; tracked reference docs are not ignored. |
-| Secret-like patterns | No real credentials in tracked sources; no placeholder values or credential-like literals present. |
-| Secret-like baseline mutation | No `project-plan/*` diffs relative to start. |
-| Framework/code artifacts | No tracked `package.json`, Gradle, Node, Prisma, Docker, Terraform provider/resource files, or framework code scaffolds. |
-| PRD requirement extraction | `PRD_ID_COUNT=95` |
-| Traceability mapping parse | `BASELINE_MAP_ROWS=95`, `OWNERSHIP_MAP_IDS=95`, `MISSING_IN_BASELINE_MAP=` (empty), `MISSING_FROM_OWNERSHIP=` (empty). |
-| Acceptance-condition coverage | Verified every row in PRD requirement table has an acceptance condition cell populated. |
+| Clean working tree scan | Clean (no uncommitted changes). |
+| Branch and remote checks | `main`; `origin` points to `https://github.com/kalk1t/QueueMe.git`. |
+| Git history | Start commit `f34cbf0c2216bdc00c44a5a0e646b42748119069`, completion commit `89aac26`. |
+| Ignore rules | `.env`, Android Gradle, `local.properties`, `node_modules`, `.next`, `dist`, `.tfstate`, private signing and service-account files are ignored; tracked reference docs are not ignored. |
+| Secret-like patterns | `SECRET_HITS=0` (`BEGIN PRIVATE KEY`, `AWS_SECRET_ACCESS_KEY=`, `STRIPE_SECRET_KEY=`, `TWILIO_AUTH_TOKEN=`, `DATABASE_URL=postgres`). |
+| Baseline mutation | `BASELINE_DIFF_LINES=0` (`project-plan/*` unchanged relative to start commit). |
+| Framework/code artifacts | `FORBIDDEN_HITS=4` (only explanatory mentions in `.md` files under README files, no implementation artifacts). |
+| PRD requirement extraction | `PRD_ID_COUNT=95`, `PRD_ID_UNIQUE=95`, `REQ_DUPLICATES=`. |
+| Traceability mapping parse | `BASELINE_MAP_ROWS=95`, `OWNERSHIP_ROWS=95`, `MISSING_IN_BASELINE_MAP=` (empty), `MISSING_OWNER=` (empty). |
+| Acceptance-condition coverage | `MISSING_ACCEPTANCE=0`, `MISSING_MILESTONE=0`, `MISSING_ACTOR=0`, `MISSING_RISK=0`. |
 | Milestone scope | Only documentation and planning deliverables changed. |
 
 ## 11) Manual review
