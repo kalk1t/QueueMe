@@ -2,10 +2,9 @@
 
 - Project: QueueMe
 - Release: Business-Ready Version 1
-- Current phase: Repository initialization
-- Active milestone: None
-- Next milestone: Milestone 01 — Product Specification Lock
-- Milestone 01 status: Not started
+- Current phase: Phase I — Product and Engineering Foundation
+- Active milestone: Milestone 01 — Product Specification Lock
+- Milestone 01 status: Pending product-owner approval
 - Application code: Not initialized
 - Infrastructure: Not provisioned
 - Production environment: Not created
@@ -13,4 +12,9 @@
 
 ## Repository foundation note
 
-This commit is a pre-milestone repository setup action. It is not execution of Milestone 01 or Milestone 03 and must not be treated as completion of any active milestone.
+Milestone 01 is in progress as a documentation and requirements milestone. This remains foundation-only work and does not implement application behavior.
+
+## Milestone 01 lifecycle tracking
+
+- Starting repository state verified on branch `main` at commit `f34cbf0`.
+- No environment or deployment was provisioned before this milestone began.
