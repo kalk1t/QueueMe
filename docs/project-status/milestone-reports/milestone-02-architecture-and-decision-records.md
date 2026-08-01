@@ -177,7 +177,8 @@
 - Architecture specification commit: `95ba0ee`
 - Review record commit: `76af683`
 - Validation commit: `not separately committed`
-- Evidence / completion commit: `cafb310`
+- Evidence / completion commit: `9286e54` (final)
+- Subsequent evidence lineage updates: `08a65b0`, `71a6fe4`, `0763bfb`, `cafb310`
 
 ## 20) Validation status
 
